@@ -32,6 +32,28 @@ Implementação atual em `src/index.html` (`#hero-decor`):
 - Inclinada ~8° (`rotate: -8deg`) para reproduzir o "visto em ângulo" da referência.
 - Animação `bulb-breathe`: variação sutil de opacidade (1 → 0.9), 4.5s. Não pisca.
 
+### Ponto de parada: a lâmpada POUSA num card (definido pelo usuário em 2026-09-04)
+
+O elemento **não desce a página inteira**. Ele desce com o atraso do paralaxe até pousar
+no primeiro card de funcionalidades da Home (`#dock-lampada` = "Controle de caixa") e
+**para ali**. Depois disso não se move mais em relação à página: fica preso no canto
+superior direito do card e sobe junto com ele no scroll.
+
+Como está implementado (`initHeroParallax` em `src/scripts/main.js`):
+
+- `measure()` calcula, em coordenadas absolutas da página, o vetor entre o centro da
+  lâmpada em repouso e o ponto de pouso (canto superior direito do card, recuado por
+  `DOCK_INSET_X` / `DOCK_INSET_Y`).
+- `render()` converte o scroll em um progresso `0 → 1`, travado em 1:
+  `progresso = min(scrollY * PARALLAX_SPEED / dy, 1)`. É o `min` que faz a lâmpada parar.
+- O deslocamento horizontal e a escala (`1 → DOCK_SCALE`, hoje `0.55`) acompanham o mesmo
+  progresso, então ela "cai" na diagonal e encolhe até assentar no card.
+- O trajeto é remedido no `resize` (com debounce) e no `load`, porque fontes e imagens
+  que chegam depois deslocam o card de destino.
+
+Para trocar o card de destino, basta mover o `id="dock-lampada"` para outro elemento —
+o cálculo se adapta sozinho.
+
 ### Se o usuário fornecer um asset próprio
 
 `src/scripts/main.js` (`initHeroDecorAsset`) tenta carregar **`assets/hero/lampada.png`**.

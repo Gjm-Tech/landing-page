@@ -118,23 +118,64 @@ function initDrawer() {
 
 /* --------------------------------------------------------------------------
    4. Paralaxe da lâmpada do hero — SOMENTE desktop
-      Comportamento documentado em .claude/skills/parallax-hero-effect/SKILL.md:
-      move mais devagar que o scroll real (efeito de "atraso"), atravessa o
-      header e sobrepõe o início da seção clara antes de sumir.
+
+   A lâmpada desce mais devagar que o scroll (efeito de "atraso") e PARA ao
+   pousar no primeiro card de funcionalidades (#dock-lampada). Depois disso
+   ela não se move mais: fica presa no card e sobe junto com a página, em vez
+   de acompanhar o scroll até o rodapé.
+   Ver .claude/skills/parallax-hero-effect/SKILL.md
    -------------------------------------------------------------------------- */
 
 const PARALLAX_SPEED = 0.45; // < 1 = mais lento que o scroll real
+const DOCK_SCALE = 0.55;     // tamanho da lâmpada ao pousar no card
+const DOCK_INSET_X = 38;     // distância da borda direita do card, em px
+const DOCK_INSET_Y = 26;     // distância do topo do card, em px
 
 function initHeroParallax() {
   const decor = document.getElementById('hero-decor');
   if (!decor) return;
 
+  const dock = document.getElementById('dock-lampada');
   const desktop = window.matchMedia('(min-width: 768px)');
+
   let ticking = false;
   let active = false;
+  let dx = 0;
+  let dy = 0;
+
+  // Mede o trajeto entre a posição de repouso da lâmpada e o ponto de pouso
+  // (canto superior direito do card), em coordenadas absolutas da página.
+  const measure = () => {
+    if (!dock) { dx = 0; dy = 0; return; }
+
+    const anterior = decor.style.transform;
+    decor.style.transform = 'none';
+
+    const origem = decor.getBoundingClientRect();
+    const destino = dock.getBoundingClientRect();
+    const scrollY = window.scrollY;
+
+    dx = (destino.right - DOCK_INSET_X) - (origem.left + origem.width / 2);
+    dy = (destino.top + scrollY + DOCK_INSET_Y) - (origem.top + scrollY + origem.height / 2);
+
+    decor.style.transform = anterior;
+  };
 
   const render = () => {
-    decor.style.transform = `translateY(${window.scrollY * PARALLAX_SPEED}px)`;
+    // Sem card de destino, mantém o paralaxe simples de antes.
+    if (dy <= 0) {
+      decor.style.transform = `translateY(${window.scrollY * PARALLAX_SPEED}px)`;
+      ticking = false;
+      return;
+    }
+
+    // 0 = parada no hero, 1 = pousada no card. Trava em 1: é aqui que ela para.
+    const progresso = Math.min((window.scrollY * PARALLAX_SPEED) / dy, 1);
+    const escala = 1 + (DOCK_SCALE - 1) * progresso;
+
+    decor.style.transform =
+      `translate(${dx * progresso}px, ${dy * progresso}px) scale(${escala})`;
+
     ticking = false;
   };
 
@@ -147,6 +188,7 @@ function initHeroParallax() {
   const enable = () => {
     if (active) return;
     active = true;
+    measure();
     window.addEventListener('scroll', onScroll, { passive: true });
     render();
   };
@@ -163,6 +205,24 @@ function initHeroParallax() {
     // Com "reduzir movimento" ligado, ele fica parado no lugar.
     desktop.matches && !prefersReducedMotion.matches ? enable() : disable();
   };
+
+  // O trajeto muda com o layout, então precisa ser remedido.
+  let resizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      if (!active) return;
+      measure();
+      render();
+    }, 150);
+  });
+
+  // Fontes e imagens chegando depois deslocam o card de destino.
+  window.addEventListener('load', () => {
+    if (!active) return;
+    measure();
+    render();
+  });
 
   sync();
   desktop.addEventListener('change', sync);

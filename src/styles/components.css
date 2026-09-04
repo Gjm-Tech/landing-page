@@ -4,24 +4,22 @@
 
 /* --------------------------------------------------------- Botões */
 
+/* Botão sólido, sem brilho colorido e sem "pulo" no hover — o halo azul
+   embaixo do botão era o que dava aparência de template genérico. */
 .btn {
   display: inline-flex;
   align-items: center;
   gap: 8px;
   padding: 12px 20px;
-  border-radius: var(--radius-sm);
+  border-radius: 8px;
   font-size: var(--fs-small);
   font-weight: 600;
   letter-spacing: -0.01em;
   white-space: nowrap;
   transition: background-color var(--dur) var(--ease),
-              color var(--dur) var(--ease),
-              transform var(--dur) var(--ease),
-              box-shadow var(--dur) var(--ease);
+              border-color var(--dur) var(--ease),
+              color var(--dur) var(--ease);
 }
-
-.btn:hover { transform: translateY(-1px); }
-.btn:active { transform: translateY(0); }
 
 .btn__arrow {
   transition: transform var(--dur) var(--ease);
@@ -34,7 +32,6 @@
 .btn--primary {
   background: var(--brand-primary);
   color: var(--text-white);
-  box-shadow: var(--shadow-brand);
 }
 
 .btn--primary:hover {
@@ -190,25 +187,26 @@
   position: relative;
 }
 
+/* Sem retângulo de fundo no hover: o texto só passa de branco para azul. */
 .nav__link,
 .nav__trigger {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 9px 14px;
-  border-radius: var(--radius-sm);
+  padding: 9px 12px;
   font-size: var(--fs-small);
   font-weight: 500;
-  color: rgba(255, 255, 255, 0.78);
-  transition: color var(--dur) var(--ease), background-color var(--dur) var(--ease);
+  color: var(--text-white);
+  background: none;
+  transition: color var(--dur) var(--ease);
 }
 
 .nav__link:hover,
 .nav__trigger:hover,
+.nav__item:hover > .nav__trigger,
 .nav__item:focus-within > .nav__trigger,
 .nav__link[aria-current='page'] {
-  color: var(--text-white);
-  background: rgba(255, 255, 255, 0.07);
+  color: var(--brand-bright);
 }
 
 .nav__chevron {

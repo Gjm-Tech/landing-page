@@ -48,20 +48,11 @@
   text-wrap: balance;
 }
 
+/* Cor chapada em vez de texto com degradê — o degradê é o clichê visual
+   que mais entrega "template gerado". */
 .hero__intro h1 em {
   font-style: normal;
-  background: linear-gradient(100deg, var(--brand-bright), var(--brand-primary));
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-
-.hero__lede {
-  margin-top: 22px;
-  margin-inline: auto;
-  max-width: 60ch;
-  color: var(--text-muted-dark);
-  text-wrap: pretty;
+  color: var(--brand-bright);
 }
 
 .hero__actions {
@@ -70,12 +61,6 @@
   justify-content: center;
   gap: 12px;
   margin-top: 34px;
-}
-
-.hero__note {
-  margin-top: 22px;
-  font-size: 0.875rem;
-  color: var(--text-muted-dark);
 }
 
 /* --- Palco dos cards flutuantes --- */
@@ -200,6 +185,18 @@
   background: var(--brand-primary);
 }
 
+/* Flutuação dos dois cards do hero — ritmos diferentes para não parecer
+   que sobem e descem em bloco. */
+@keyframes float-dark {
+  0%, 100% { translate: 0 0; }
+  50%      { translate: 0 -13px; }
+}
+
+@keyframes float-light {
+  0%, 100% { translate: 0 -18px; }
+  50%      { translate: 0 -33px; }
+}
+
 /* Marca de "isto é uma ilustração, não um dado real" */
 .hero__disclaimer {
   position: relative;
@@ -263,8 +260,10 @@
 
   .hero-card { padding: 26px; }
 
-  .hero-card--dark  { transform: rotate(-1.2deg); }
-  .hero-card--light { transform: rotate(1.2deg) translateY(-18px); }
+  /* A inclinação usa `rotate`, e a flutuação usa `translate` — propriedades
+     separadas em CSS moderno, então uma não sobrescreve a outra. */
+  .hero-card--dark  { rotate: -1.2deg; animation: float-dark 6s var(--ease) infinite; }
+  .hero-card--light { rotate: 1.2deg;  animation: float-light 7s var(--ease) infinite; }
 
   .hero-decor {
     /* deslocada para a esquerda: sobrepõe o gráfico do card escuro,
@@ -542,7 +541,6 @@
 .final-cta .btn--primary {
   background: var(--bg-white);
   color: var(--brand-primary);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
 }
 
 .final-cta .btn--primary:hover {
