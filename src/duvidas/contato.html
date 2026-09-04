@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Contato — GJM Tech</title>
+  <meta name="description" content="Fale com o time da GJM Tech sobre o GJM Gestão. Conte como funciona a rotina do seu negócio e acompanhe o produto desde o começo.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../styles/tokens.css">
+  <link rel="stylesheet" href="../styles/base.css">
+  <link rel="stylesheet" href="../styles/components.css">
+  <link rel="stylesheet" href="../styles/home.css">
+  <link rel="stylesheet" href="../styles/pages.css">
+</head>
+<body>
+
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+
+  <!-- ==================================================== HEADER -->
+  <header class="site-header" id="site-header">
+    <div class="container site-header__inner">
+
+      <a class="brand" href="../index.html" aria-label="GJM Tech — página inicial">
+        <img src="../../assets/images/logo.jpg" alt="GJM Tech">
+      </a>
+
+      <nav class="nav" aria-label="Navegação principal">
+        <ul class="nav__list">
+          <li class="nav__item">
+            <a class="nav__link" href="../index.html">Home</a>
+          </li>
+
+          <li class="nav__item">
+            <button class="nav__trigger" type="button" aria-expanded="false" aria-controls="dd-produtos">
+              Produtos
+              <svg class="nav__chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+            </button>
+            <div class="nav__dropdown" id="dd-produtos">
+              <a href="../produtos/gjm-gestao.html">
+                GJM Gestão
+                <span>Caixa, estoque, nota fiscal e clientes</span>
+              </a>
+            </div>
+          </li>
+
+          <li class="nav__item">
+            <button class="nav__trigger" type="button" aria-expanded="false" aria-controls="dd-institucional">
+              Institucional
+              <svg class="nav__chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+            </button>
+            <div class="nav__dropdown" id="dd-institucional">
+              <a href="../institucional/quem-somos.html">
+                Quem Somos
+                <span>A história e o propósito da GJM Tech</span>
+              </a>
+            </div>
+          </li>
+
+          <li class="nav__item">
+            <button class="nav__trigger is-active" type="button" aria-expanded="false" aria-controls="dd-duvidas">
+              Dúvidas
+              <svg class="nav__chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+            </button>
+            <div class="nav__dropdown" id="dd-duvidas">
+              <a href="../duvidas/contato.html" aria-current="page">
+                Contato
+                <span>Fale com quem desenvolve o produto</span>
+              </a>
+            </div>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="site-header__actions">
+        <a class="btn btn--primary" href="#formulario">
+          Fale com o nosso time
+          <svg class="btn__arrow" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
+
+      <button class="nav-toggle" type="button" id="nav-toggle" aria-expanded="false" aria-controls="drawer">
+        <span></span><span></span><span></span>
+        <span class="sr-only">Abrir menu</span>
+      </button>
+
+    </div>
+  </header>
+
+  <!-- ==================================================== DRAWER MOBILE -->
+  <div class="drawer-overlay" id="drawer-overlay" hidden></div>
+
+  <aside class="drawer" id="drawer" aria-label="Menu" aria-hidden="true">
+    <div class="drawer__head">
+      <span class="brand brand--sm">
+        <img src="../../assets/images/logo.jpg" alt="GJM Tech">
+      </span>
+      <button class="drawer__close" type="button" id="drawer-close">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
+        <span class="sr-only">Fechar menu</span>
+      </button>
+    </div>
+
+    <div class="drawer__group">
+      <a class="drawer__link" href="../index.html">Home</a>
+    </div>
+
+    <div class="drawer__group">
+      <span class="drawer__label">Produtos</span>
+      <a class="drawer__link" href="../produtos/gjm-gestao.html">GJM Gestão</a>
+    </div>
+
+    <div class="drawer__group">
+      <span class="drawer__label">Institucional</span>
+      <a class="drawer__link" href="../institucional/quem-somos.html">Quem Somos</a>
+    </div>
+
+    <div class="drawer__group">
+      <span class="drawer__label">Dúvidas</span>
+      <a class="drawer__link" href="../duvidas/contato.html">Contato</a>
+    </div>
+
+    <a class="btn btn--primary btn--lg" href="#formulario">
+      Fale com o nosso time
+      <svg class="btn__arrow" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a>
+  </aside>
+
+  <main id="conteudo">
+
+    <!-- ==================================================== HERO DA PÁGINA -->
+    <section class="page-hero">
+      <div class="container">
+        <div class="page-hero__inner">
+
+          <nav aria-label="Trilha de navegação">
+            <ol class="breadcrumb">
+              <li><a href="../index.html">Home</a></li>
+              <li><span>Dúvidas</span></li>
+              <li><span aria-current="page">Contato</span></li>
+            </ol>
+          </nav>
+
+          <span class="eyebrow">Contato</span>
+          <h1>Fale com o nosso time</h1>
+
+          <p class="page-hero__lede">
+            Conte como funciona a rotina do seu negócio hoje — o que você controla no
+            caderno, na planilha ou de cabeça. É essa conversa que define o que entra
+            na primeira versão do GJM Gestão.
+          </p>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================================================== CANAIS + FORMULÁRIO -->
+    <section class="section section--light" id="formulario">
+      <div class="container contact">
+
+        <!-- --- Canais diretos --- -->
+        <div class="reveal">
+          <h2 style="margin-bottom:8px">Canais diretos</h2>
+          <p style="color:var(--text-muted);margin-bottom:28px">
+            Se preferir, fale com a gente sem passar pelo formulário.
+          </p>
+
+          <div class="contact-channels">
+
+            <!--
+              Placeholders obrigatórios (ver skill content-guidelines).
+              NÃO substituir por um e-mail/telefone "verossímil" — só pelos
+              dados reais, quando o usuário informar.
+            -->
+            <div class="channel">
+              <span class="channel__icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6 10-6"/></svg>
+              </span>
+              <div>
+                <h3>E-mail</h3>
+                <a href="mailto:XXXXX@email.com">XXXXX@email.com</a>
+                <small>Respondemos em dias úteis.</small>
+              </div>
+            </div>
+
+            <div class="channel">
+              <span class="channel__icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2Z"/></svg>
+              </span>
+              <div>
+                <h3>Telefone</h3>
+                <a href="tel:+55XXXXXXXX">+55 XXXX-XXXX</a>
+                <small>Horário comercial.</small>
+              </div>
+            </div>
+
+            <div class="channel">
+              <span class="channel__icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7Z"/><circle cx="12" cy="9" r="2.5"/></svg>
+              </span>
+              <div>
+                <h3>Endereço</h3>
+                <strong>A definir</strong>
+                <small><!-- aguardando dado real do usuário -->Endereço ainda não divulgado.</small>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- --- Formulário --- -->
+        <div class="reveal">
+          <form class="form" data-form="contato" novalidate>
+            <h2 style="margin-bottom:8px">Conte sobre o seu negócio</h2>
+            <p style="color:var(--text-muted);margin-bottom:24px;font-size:var(--fs-small)">
+              Quanto mais concreto, melhor. Não precisa formalidade.
+            </p>
+
+            <div class="form__grid form__grid--2">
+
+              <div class="field">
+                <label for="nome">Nome</label>
+                <input type="text" id="nome" name="nome" autocomplete="name" required>
+              </div>
+
+              <div class="field">
+                <label for="email">E-mail</label>
+                <input type="email" id="email" name="email" autocomplete="email" required>
+              </div>
+
+              <div class="field">
+                <label for="telefone">Telefone <span>(opcional)</span></label>
+                <input type="tel" id="telefone" name="telefone" autocomplete="tel">
+              </div>
+
+              <div class="field">
+                <label for="negocio">Tipo de negócio</label>
+                <select id="negocio" name="negocio" required>
+                  <option value="">Selecione…</option>
+                  <option value="loja-roupas">Loja de roupas</option>
+                  <option value="grafica">Gráfica</option>
+                  <option value="comercio">Comércio em geral</option>
+                  <option value="outro">Outro</option>
+                </select>
+              </div>
+
+              <div class="field field--full">
+                <label for="mensagem">Como você controla caixa, estoque e clientes hoje?</label>
+                <textarea id="mensagem" name="mensagem" required
+                  placeholder="Ex.: o caixa eu anoto num caderno e passo pra planilha no fim da semana…"></textarea>
+              </div>
+
+            </div>
+
+            <button class="btn btn--primary btn--lg" type="submit">
+              Enviar mensagem
+              <svg class="btn__arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </button>
+
+            <p class="form__status" data-form-status role="status" aria-live="polite"></p>
+
+            <!--
+              O projeto não tem backend (ver CLAUDE.md). O formulário valida no
+              navegador e avisa que o envio não está ativo, em vez de fingir
+              sucesso. Para ligar de verdade: definir ENDPOINT em scripts/main.js.
+            -->
+            <p class="form__note">
+              O envio pelo site ainda não está ativo — enquanto isso, use o e-mail ou
+              o telefone dos canais diretos.
+            </p>
+          </form>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==================================================== DÚVIDAS FREQUENTES -->
+    <section class="section section--light" style="padding-top:0">
+      <div class="container">
+
+        <div class="section-head reveal">
+          <span class="eyebrow">Dúvidas frequentes</span>
+          <h2>Perguntas que já chegaram até aqui</h2>
+        </div>
+
+        <div class="faq reveal">
+
+          <details>
+            <summary>O GJM Gestão já está disponível?</summary>
+            <p>
+              Ainda não. O produto está em desenvolvimento e não tem data de lançamento
+              anunciada. Quem entra em contato agora é avisado assim que ele estiver
+              pronto.
+            </p>
+          </details>
+
+          <details>
+            <summary>Quanto vai custar?</summary>
+            <p>
+              Os planos e valores ainda não foram definidos. Assim que existirem, serão
+              divulgados aqui no site — não trabalhamos com preço "sob consulta" para
+              esconder valor.
+            </p>
+          </details>
+
+          <details>
+            <summary>Quais funcionalidades entram na primeira versão?</summary>
+            <p>
+              Quatro: controle de caixa, controle de estoque, emissão de nota fiscal e
+              controle de clientes. Elas estão descritas em detalhe na
+              <a href="../produtos/gjm-gestao.html" style="color:var(--brand-primary);font-weight:600">página do GJM Gestão</a>.
+            </p>
+          </details>
+
+          <details>
+            <summary>Meu negócio não é loja nem gráfica. Serve pra mim?</summary>
+            <p>
+              Provavelmente sim, se a sua rotina passa por vender, controlar o que tem
+              em estoque, emitir nota e lembrar de quem comprou. Vale entrar em contato
+              e contar como funciona — casos diferentes ajudam a moldar o produto.
+            </p>
+          </details>
+
+          <details>
+            <summary>Falar com vocês agora adianta alguma coisa?</summary>
+            <p>
+              Adianta bastante. O escopo da primeira versão ainda está sendo definido, e
+              o que você conta sobre a sua rotina influencia diretamente o que é
+              priorizado.
+            </p>
+          </details>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==================================================== FOOTER -->
+  <footer class="site-footer">
+    <div class="container">
+
+      <div class="site-footer__top">
+        <div class="site-footer__about">
+          <span class="brand brand--lg">
+            <img src="../../assets/images/logo.jpg" alt="GJM Tech">
+          </span>
+          <p>
+            Software house de soluções de gestão para pequenos e médios negócios.
+            Criadora do GJM Gestão.
+          </p>
+        </div>
+
+        <div class="site-footer__cols">
+          <div>
+            <h4>Produtos</h4>
+            <ul>
+              <li><a href="../produtos/gjm-gestao.html">GJM Gestão</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Institucional</h4>
+            <ul>
+              <li><a href="../institucional/quem-somos.html">Quem Somos</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Dúvidas</h4>
+            <ul>
+              <li><a href="../duvidas/contato.html">Contato</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Contato</h4>
+            <ul>
+              <li><a href="mailto:XXXXX@email.com">XXXXX@email.com</a></li>
+              <li><a href="tel:+55XXXXXXXX">+55 XXXX-XXXX</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="site-footer__bottom">
+        <p>© <span id="ano">2026</span> GJM Tech. Todos os direitos reservados.</p>
+        <p>Feito no Brasil 🇧🇷</p>
+      </div>
+
+    </div>
+  </footer>
+
+  <script type="module" src="../scripts/main.js"></script>
+</body>
+</html>

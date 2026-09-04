@@ -174,7 +174,9 @@ function initHeroParallax() {
       (assets/hero/lampada.png). Enquanto o arquivo não existir, o SVG fica.
    -------------------------------------------------------------------------- */
 
-const HERO_DECOR_ASSET = '../assets/hero/lampada.png';
+// Resolvido a partir da URL do próprio script (src/scripts/main.js), não da
+// página — assim funciona igual na Home e nas páginas dentro de subpastas.
+const HERO_DECOR_ASSET = new URL('../../assets/hero/lampada.png', import.meta.url).href;
 
 function initHeroDecorAsset() {
   const decor = document.getElementById('hero-decor');
@@ -221,7 +223,48 @@ function initReveal() {
 }
 
 /* --------------------------------------------------------------------------
-   7. Ano do rodapé
+   7. Formulário de contato
+
+   ATENÇÃO: o projeto não tem backend (ver CLAUDE.md). O formulário valida os
+   campos no navegador, mas NÃO envia nada — e diz isso ao usuário em vez de
+   fingir sucesso. Para ativar o envio, defina o endpoint em `ENDPOINT` abaixo
+   e troque o bloco marcado com TODO.
+   -------------------------------------------------------------------------- */
+
+const ENDPOINT = null; // TODO: URL do serviço de envio, quando existir
+
+function initContactForm() {
+  const form = document.querySelector('[data-form="contato"]');
+  if (!form) return;
+
+  const status = form.querySelector('[data-form-status]');
+
+  const setStatus = (message, kind) => {
+    if (!status) return;
+    status.textContent = message;
+    status.dataset.kind = kind;
+  };
+
+  form.addEventListener('submit', async (event) => {
+    event.preventDefault();
+
+    if (!form.reportValidity()) return;
+
+    if (!ENDPOINT) {
+      setStatus(
+        'O envio pelo site ainda não está ativo. Enquanto isso, fale com a gente pelo e-mail ou telefone dos canais diretos.',
+        'pending'
+      );
+      return;
+    }
+
+    // TODO: quando houver endpoint, enviar de verdade e tratar erro de rede.
+    setStatus('Enviando...', 'pending');
+  });
+}
+
+/* --------------------------------------------------------------------------
+   8. Ano do rodapé
    -------------------------------------------------------------------------- */
 
 function initYear() {
@@ -237,4 +280,5 @@ initDrawer();
 initHeroParallax();
 initHeroDecorAsset();
 initReveal();
+initContactForm();
 initYear();

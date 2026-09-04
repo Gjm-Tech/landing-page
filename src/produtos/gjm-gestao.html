@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GJM Gestão — Caixa, estoque, nota fiscal e clientes | GJM Tech</title>
+  <meta name="description" content="O GJM Gestão reúne controle de caixa, controle de estoque, emissão de nota fiscal e controle de clientes num sistema só. Produto em desenvolvimento pela GJM Tech.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../styles/tokens.css">
+  <link rel="stylesheet" href="../styles/base.css">
+  <link rel="stylesheet" href="../styles/components.css">
+  <link rel="stylesheet" href="../styles/home.css">
+  <link rel="stylesheet" href="../styles/pages.css">
+</head>
+<body>
+
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+
+  <!-- ==================================================== HEADER -->
+  <header class="site-header" id="site-header">
+    <div class="container site-header__inner">
+
+      <a class="brand" href="../index.html" aria-label="GJM Tech — página inicial">
+        <img src="../../assets/images/logo.jpg" alt="GJM Tech">
+      </a>
+
+      <nav class="nav" aria-label="Navegação principal">
+        <ul class="nav__list">
+          <li class="nav__item">
+            <a class="nav__link" href="../index.html">Home</a>
+          </li>
+
+          <li class="nav__item">
+            <button class="nav__trigger is-active" type="button" aria-expanded="false" aria-controls="dd-produtos">
+              Produtos
+              <svg class="nav__chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+            </button>
+            <div class="nav__dropdown" id="dd-produtos">
+              <a href="../produtos/gjm-gestao.html" aria-current="page">
+                GJM Gestão
+                <span>Caixa, estoque, nota fiscal e clientes</span>
+              </a>
+            </div>
+          </li>
+
+          <li class="nav__item">
+            <button class="nav__trigger" type="button" aria-expanded="false" aria-controls="dd-institucional">
+              Institucional
+              <svg class="nav__chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+            </button>
+            <div class="nav__dropdown" id="dd-institucional">
+              <a href="../institucional/quem-somos.html">
+                Quem Somos
+                <span>A história e o propósito da GJM Tech</span>
+              </a>
+            </div>
+          </li>
+
+          <li class="nav__item">
+            <button class="nav__trigger" type="button" aria-expanded="false" aria-controls="dd-duvidas">
+              Dúvidas
+              <svg class="nav__chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+            </button>
+            <div class="nav__dropdown" id="dd-duvidas">
+              <a href="../duvidas/contato.html">
+                Contato
+                <span>Fale com quem desenvolve o produto</span>
+              </a>
+            </div>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="site-header__actions">
+        <a class="btn btn--primary" href="../duvidas/contato.html">
+          Fale com o nosso time
+          <svg class="btn__arrow" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
+
+      <button class="nav-toggle" type="button" id="nav-toggle" aria-expanded="false" aria-controls="drawer">
+        <span></span><span></span><span></span>
+        <span class="sr-only">Abrir menu</span>
+      </button>
+
+    </div>
+  </header>
+
+  <!-- ==================================================== DRAWER MOBILE -->
+  <div class="drawer-overlay" id="drawer-overlay" hidden></div>
+
+  <aside class="drawer" id="drawer" aria-label="Menu" aria-hidden="true">
+    <div class="drawer__head">
+      <span class="brand brand--sm">
+        <img src="../../assets/images/logo.jpg" alt="GJM Tech">
+      </span>
+      <button class="drawer__close" type="button" id="drawer-close">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
+        <span class="sr-only">Fechar menu</span>
+      </button>
+    </div>
+
+    <div class="drawer__group">
+      <a class="drawer__link" href="../index.html">Home</a>
+    </div>
+
+    <div class="drawer__group">
+      <span class="drawer__label">Produtos</span>
+      <a class="drawer__link" href="../produtos/gjm-gestao.html">GJM Gestão</a>
+    </div>
+
+    <div class="drawer__group">
+      <span class="drawer__label">Institucional</span>
+      <a class="drawer__link" href="../institucional/quem-somos.html">Quem Somos</a>
+    </div>
+
+    <div class="drawer__group">
+      <span class="drawer__label">Dúvidas</span>
+      <a class="drawer__link" href="../duvidas/contato.html">Contato</a>
+    </div>
+
+    <a class="btn btn--primary btn--lg" href="../duvidas/contato.html">
+      Fale com o nosso time
+      <svg class="btn__arrow" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a>
+  </aside>
+
+  <main id="conteudo">
+
+    <!-- ==================================================== HERO DA PÁGINA -->
+    <section class="page-hero">
+      <div class="container">
+        <div class="page-hero__inner">
+
+          <nav aria-label="Trilha de navegação">
+            <ol class="breadcrumb">
+              <li><a href="../index.html">Home</a></li>
+              <li><span>Produtos</span></li>
+              <li><span aria-current="page">GJM Gestão</span></li>
+            </ol>
+          </nav>
+
+          <span class="badge-dev" style="margin-bottom:20px">Em desenvolvimento</span>
+
+          <h1>GJM Gestão</h1>
+
+          <p class="page-hero__lede">
+            Um sistema de gestão para quem toca o negócio no balcão. Caixa, estoque,
+            nota fiscal e clientes conversando entre si — em vez de quatro controles
+            soltos que nunca batem.
+          </p>
+
+          <div class="page-hero__actions">
+            <a class="btn btn--primary btn--lg" href="../duvidas/contato.html">
+              Fale com o nosso time
+              <svg class="btn__arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </a>
+            <a class="btn btn--ghost-light btn--lg" href="#funcionalidades">Ver as funcionalidades</a>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================================================== PARA QUEM É -->
+    <section class="section section--light">
+      <div class="container">
+
+        <div class="section-head reveal">
+          <span class="eyebrow">Para quem é</span>
+          <h2>Feito para o comércio que não tem departamento de TI</h2>
+          <p>
+            O GJM Gestão é pensado para pequenos e médios negócios — quem cuida da
+            venda, do estoque e do financeiro ao mesmo tempo, sem tempo para aprender
+            um sistema complicado.
+          </p>
+        </div>
+
+        <div class="cards cards--3">
+          <article class="card reveal">
+            <div class="card__icon" style="background:var(--accent-lavender)">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6H4l1.5 13a2 2 0 0 0 2 1.8h9a2 2 0 0 0 2-1.8Z"/><path d="M9 6a3 3 0 0 1 6 0"/></svg>
+            </div>
+            <h3>Lojas de roupas</h3>
+            <p>
+              Muitas variações do mesmo produto — tamanho, cor, modelo — e um estoque
+              que muda a cada venda.
+            </p>
+          </article>
+
+          <article class="card reveal">
+            <div class="card__icon" style="background:var(--accent-mint)">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9V3h12v6M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 14h12v7H6z"/></svg>
+            </div>
+            <h3>Gráficas de bairro</h3>
+            <p>
+              Trabalho sob encomenda, cliente que volta sempre e nota fiscal que
+              precisa sair certa na hora da entrega.
+            </p>
+          </article>
+
+          <article class="card reveal">
+            <div class="card__icon" style="background:var(--accent-pink)">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h18M5 21V8l7-5 7 5v13"/><path d="M10 21v-6h4v6"/></svg>
+            </div>
+            <h3>Comércio em geral</h3>
+            <p>
+              Qualquer negócio que hoje resolve o dia entre um caderno, uma planilha e
+              a memória de quem está no caixa.
+            </p>
+          </article>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==================================================== FUNCIONALIDADES -->
+    <section class="section section--light" id="funcionalidades" style="padding-top:0">
+      <div class="container">
+
+        <div class="section-head reveal" style="margin-bottom:clamp(40px,5vw,64px)">
+          <span class="eyebrow">As 4 funcionalidades do MVP</span>
+          <h2>O essencial, bem resolvido</h2>
+          <p>
+            Esta é a primeira versão do produto. Em vez de entregar dezenas de módulos
+            pela metade, o GJM Gestão começa por quatro controles que funcionam juntos.
+          </p>
+        </div>
+
+        <!-- 1 — Controle de caixa -->
+        <article class="detail reveal">
+          <div class="detail__text">
+            <span class="detail__eyebrow"><span class="detail__num">01</span> Controle de caixa</span>
+            <h2>Saiba quanto entrou e quanto saiu, sem fechar a conta no papel</h2>
+            <p>
+              Cada venda, cada despesa e cada retirada ficam registradas no momento em
+              que acontecem. No fim do expediente o caixa já está fechado — não sobra
+              aquela conta para fazer depois, quando ninguém lembra mais dos detalhes.
+            </p>
+            <ul class="detail__list">
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> Entradas e saídas lançadas na hora</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> Fechamento do dia sem recontagem manual</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> Histórico para comparar um dia com o outro</li>
+            </ul>
+          </div>
+
+          <div class="detail__visual">
+            <div class="mock">
+              <div class="mock__bar">
+                <span class="mock__chip" style="background:var(--accent-mint)">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2.5"/></svg>
+                </span>
+                <strong>Caixa do dia</strong>
+              </div>
+              <div class="mock__row"><span class="mock__dot" style="background:var(--accent-green)"></span><span>Vendas</span><span>R$ 9.120,00</span></div>
+              <div class="mock__row"><span class="mock__dot" style="background:var(--accent-coral)"></span><span>Despesas</span><span>− R$ 670,00</span></div>
+              <div class="mock__row"><span class="mock__dot" style="background:var(--text-muted)"></span><span>Retiradas</span><span>− R$ 0,00</span></div>
+              <div class="mock__total"><span>Saldo</span><b>R$ 8.450,00</b></div>
+              <p class="mock__note">Tela ilustrativa — valores meramente demonstrativos.</p>
+            </div>
+          </div>
+        </article>
+
+        <!-- 2 — Controle de estoque -->
+        <article class="detail reveal">
+          <div class="detail__text">
+            <span class="detail__eyebrow"><span class="detail__num">02</span> Controle de estoque</span>
+            <h2>A prateleira certa na tela, sem contar tudo de novo</h2>
+            <p>
+              O estoque acompanha a venda: saiu do caixa, baixou do catálogo. E quando
+              um item chega perto de acabar, ele aparece antes de faltar — não depois
+              que o cliente já foi embora sem comprar.
+            </p>
+            <ul class="detail__list">
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> Baixa automática a cada venda registrada</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> Aviso do que está com estoque baixo</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> Catálogo com variações do mesmo produto</li>
+            </ul>
+          </div>
+
+          <div class="detail__visual">
+            <div class="mock">
+              <div class="mock__bar">
+                <span class="mock__chip" style="background:var(--accent-lavender)">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m21 8-9-5-9 5v8l9 5 9-5Z"/><path d="m3 8 9 5 9-5M12 13v8"/></svg>
+                </span>
+                <strong>Estoque</strong>
+              </div>
+              <div class="mock__row"><span>Camiseta lisa · P</span><span class="mock__tag" style="background:rgba(63,182,138,.16);color:#1F7A57">42 un.</span></div>
+              <div class="mock__row"><span>Camiseta lisa · M</span><span class="mock__tag" style="background:rgba(63,182,138,.16);color:#1F7A57">28 un.</span></div>
+              <div class="mock__row"><span>Camiseta lisa · G</span><span class="mock__tag" style="background:rgba(244,148,143,.22);color:#B04742">3 un.</span></div>
+              <div class="mock__row"><span>Moletom · Único</span><span class="mock__tag" style="background:rgba(63,182,138,.16);color:#1F7A57">17 un.</span></div>
+              <p class="mock__note">Tela ilustrativa — valores meramente demonstrativos.</p>
+            </div>
+          </div>
+        </article>
+
+        <!-- 3 — Emissão de nota fiscal -->
+        <article class="detail reveal">
+          <div class="detail__text">
+            <span class="detail__eyebrow"><span class="detail__num">03</span> Emissão de nota fiscal</span>
+            <h2>A nota sai da venda, não de um formulário em branco</h2>
+            <p>
+              Os dados do cliente e do produto já estão cadastrados no sistema — a nota
+              usa o que existe em vez de pedir que você digite tudo outra vez em outro
+              programa. Menos retrabalho e menos chance de erro de digitação.
+            </p>
+            <ul class="detail__list">
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> Emissão a partir da venda já registrada</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> Sem redigitar dados de cliente e produto</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> Notas emitidas ficam no histórico da venda</li>
+            </ul>
+          </div>
+
+          <div class="detail__visual">
+            <div class="mock">
+              <div class="mock__bar">
+                <span class="mock__chip" style="background:var(--accent-pink)">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H7a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7Z"/><path d="M14 2v5h5M9 13h6M9 17h4"/></svg>
+                </span>
+                <strong>Nota fiscal</strong>
+              </div>
+              <div class="mock__row"><span>Venda</span><span>#1042</span></div>
+              <div class="mock__row"><span>Cliente</span><span>Cadastrado</span></div>
+              <div class="mock__row"><span>Itens</span><span>3</span></div>
+              <div class="mock__row"><span>Situação</span><span class="mock__tag" style="background:rgba(63,182,138,.16);color:#1F7A57">Emitida</span></div>
+              <p class="mock__note">Tela ilustrativa — valores meramente demonstrativos.</p>
+            </div>
+          </div>
+        </article>
+
+        <!-- 4 — Controle de clientes -->
+        <article class="detail reveal">
+          <div class="detail__text">
+            <span class="detail__eyebrow"><span class="detail__num">04</span> Controle de clientes</span>
+            <h2>Quem já comprou com você, num lugar só</h2>
+            <p>
+              Contato, histórico de compras e o que cada pessoa costuma levar. Serve
+              para atender melhor quem volta e para saber a quem avisar quando chega
+              aquilo que ela procurava.
+            </p>
+            <ul class="detail__list">
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> Cadastro com contato e dados para a nota</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> Histórico de compras por cliente</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> Busca rápida na hora do atendimento</li>
+            </ul>
+          </div>
+
+          <div class="detail__visual">
+            <div class="mock">
+              <div class="mock__bar">
+                <span class="mock__chip" style="background:var(--accent-green)">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/></svg>
+                </span>
+                <strong>Clientes</strong>
+              </div>
+              <div class="mock__row"><span>Cadastrados</span><span>128</span></div>
+              <div class="mock__row"><span>Compraram este mês</span><span>34</span></div>
+              <div class="mock__row"><span>Com nota emitida</span><span>91</span></div>
+              <div class="mock__total"><span>Recorrentes</span><b>62%</b></div>
+              <p class="mock__note">Tela ilustrativa — valores meramente demonstrativos.</p>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ==================================================== STATUS DO PRODUTO -->
+    <section class="section section--dark">
+      <div class="container">
+        <div class="status-box reveal">
+          <div>
+            <span class="badge-dev" style="margin-bottom:18px">Em desenvolvimento</span>
+            <h2>Onde o GJM Gestão está hoje</h2>
+            <p>
+              O produto ainda está sendo construído e não tem data de lançamento
+              anunciada. Preferimos dizer isso com todas as letras a prometer um prazo
+              que ainda não existe.
+            </p>
+            <p>
+              Se o que está descrito aqui resolve algo que te incomoda hoje, vale a
+              conversa: é exatamente esse tipo de retorno que define o que entra na
+              primeira versão.
+            </p>
+            <div style="margin-top:28px">
+              <a class="btn btn--primary btn--lg" href="../duvidas/contato.html">
+                Fale com o nosso time
+                <svg class="btn__arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              </a>
+            </div>
+          </div>
+
+          <div>
+            <div class="product-showcase" style="box-shadow:none">
+              <div class="product-showcase__logo">
+                <img src="../../assets/images/logo_produto.png" alt="GJM Gestão — controle, organização e resultados">
+              </div>
+            </div>
+
+            <ul class="status-list" style="margin-top:28px">
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+                Escopo da primeira versão: as 4 funcionalidades desta página.
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
+                O que vem depois é definido com quem estiver usando.
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg>
+                Quem entra em contato agora é avisado quando o produto estiver pronto.
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================================================== CTA FINAL -->
+    <section class="final-cta">
+      <div class="container">
+        <div class="final-cta__box reveal">
+          <h2>Isso resolveria o seu dia a dia?</h2>
+          <p>
+            Conte como funciona a rotina do seu negócio hoje. É essa conversa que
+            define as próximas funcionalidades do GJM Gestão.
+          </p>
+
+          <div class="final-cta__actions">
+            <a class="btn btn--primary btn--lg" href="../duvidas/contato.html">
+              Fale com o nosso time
+              <svg class="btn__arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </a>
+          </div>
+
+          <!-- Placeholders obrigatórios até o usuário informar os dados reais
+               (ver skill content-guidelines) -->
+          <p class="final-cta__contact">
+            Ou fale direto: <strong>XXXXX@email.com</strong> · <strong>+55 XXXX-XXXX</strong>
+          </p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==================================================== FOOTER -->
+  <footer class="site-footer">
+    <div class="container">
+
+      <div class="site-footer__top">
+        <div class="site-footer__about">
+          <span class="brand brand--lg">
+            <img src="../../assets/images/logo.jpg" alt="GJM Tech">
+          </span>
+          <p>
+            Software house de soluções de gestão para pequenos e médios negócios.
+            Criadora do GJM Gestão.
+          </p>
+        </div>
+
+        <div class="site-footer__cols">
+          <div>
+            <h4>Produtos</h4>
+            <ul>
+              <li><a href="../produtos/gjm-gestao.html">GJM Gestão</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Institucional</h4>
+            <ul>
+              <li><a href="../institucional/quem-somos.html">Quem Somos</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Dúvidas</h4>
+            <ul>
+              <li><a href="../duvidas/contato.html">Contato</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Contato</h4>
+            <ul>
+              <li><a href="mailto:XXXXX@email.com">XXXXX@email.com</a></li>
+              <li><a href="tel:+55XXXXXXXX">+55 XXXX-XXXX</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="site-footer__bottom">
+        <p>© <span id="ano">2026</span> GJM Tech. Todos os direitos reservados.</p>
+        <p>Feito no Brasil 🇧🇷</p>
+      </div>
+
+    </div>
+  </footer>
+
+  <script type="module" src="../scripts/main.js"></script>
+</body>
+</html>

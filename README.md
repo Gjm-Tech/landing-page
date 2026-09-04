@@ -92,13 +92,29 @@ Essa foi a stack assumida por ser a opção mais simples e direta para o escopo 
 
 ## Status
 
-**Home implementada** — header sticky com dropdowns, drawer mobile, hero com paralaxe,
-grid das 4 funcionalidades, seção "Controle total", seção institucional, CTA final e footer.
+**As 4 páginas estão implementadas.**
 
-Próximos passos:
+| Página | Arquivo | Conteúdo |
+|---|---|---|
+| Home | `src/index.html` | hero com paralaxe, 4 funcionalidades, "Controle total", institucional, CTA |
+| GJM Gestão | `src/produtos/gjm-gestao.html` | público-alvo, as 4 funcionalidades detalhadas com mocks de tela, status do produto |
+| Quem Somos | `src/institucional/quem-somos.html` | o que fazemos, 4 princípios, o produto |
+| Contato | `src/duvidas/contato.html` | canais diretos, formulário e dúvidas frequentes |
 
-- [ ] `/produtos/gjm-gestao` — página de detalhe do produto
-- [ ] `/institucional/quem-somos` — sobre a empresa
-- [ ] `/duvidas/contato` — dados de contato / formulário
+### Pendências conhecidas
 
-Os links do menu para essas três páginas já existem no HTML e vão dar 404 até serem criadas.
+- **Dados de contato** — e-mail, telefone e endereço seguem como placeholder. Trocar em
+  todas as 4 páginas (o endereço só existe em `duvidas/contato.html`).
+- **Envio do formulário** — não há backend. O formulário valida no navegador e avisa que
+  o envio não está ativo, em vez de fingir sucesso. Para ligar: definir `ENDPOINT` em
+  `src/scripts/main.js` e completar o `TODO` do handler.
+- **História da empresa** — ano de fundação, cidade e time não foram informados, então não
+  foram escritos. Há um comentário marcando o lugar em `institucional/quem-somos.html`.
+- **Header e footer duplicados** nos 4 HTMLs. É proposital: sem build step, duplicar o
+  markup mantém a navegação funcionando mesmo sem JS. Ao editar um, editar os quatro.
+
+### Convenções que valem a pena saber
+
+- Os números que aparecem nos mocks de tela são **ilustrativos** e estão rotulados como
+  tal na interface. Não são métricas da GJM Tech (ver `content-guidelines`).
+- Cada página marca o item ativo do menu com `.nav__trigger.is-active` + `aria-current`.

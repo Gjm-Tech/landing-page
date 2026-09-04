@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Quem Somos — GJM Tech</title>
+  <meta name="description" content="A GJM Tech é uma software house que desenvolve soluções de gestão para pequenos e médios negócios. Conheça o propósito e a forma de trabalho por trás do GJM Gestão.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../styles/tokens.css">
+  <link rel="stylesheet" href="../styles/base.css">
+  <link rel="stylesheet" href="../styles/components.css">
+  <link rel="stylesheet" href="../styles/home.css">
+  <link rel="stylesheet" href="../styles/pages.css">
+</head>
+<body>
+
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+
+  <!-- ==================================================== HEADER -->
+  <header class="site-header" id="site-header">
+    <div class="container site-header__inner">
+
+      <a class="brand" href="../index.html" aria-label="GJM Tech — página inicial">
+        <img src="../../assets/images/logo.jpg" alt="GJM Tech">
+      </a>
+
+      <nav class="nav" aria-label="Navegação principal">
+        <ul class="nav__list">
+          <li class="nav__item">
+            <a class="nav__link" href="../index.html">Home</a>
+          </li>
+
+          <li class="nav__item">
+            <button class="nav__trigger" type="button" aria-expanded="false" aria-controls="dd-produtos">
+              Produtos
+              <svg class="nav__chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+            </button>
+            <div class="nav__dropdown" id="dd-produtos">
+              <a href="../produtos/gjm-gestao.html">
+                GJM Gestão
+                <span>Caixa, estoque, nota fiscal e clientes</span>
+              </a>
+            </div>
+          </li>
+
+          <li class="nav__item">
+            <button class="nav__trigger is-active" type="button" aria-expanded="false" aria-controls="dd-institucional">
+              Institucional
+              <svg class="nav__chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+            </button>
+            <div class="nav__dropdown" id="dd-institucional">
+              <a href="../institucional/quem-somos.html" aria-current="page">
+                Quem Somos
+                <span>A história e o propósito da GJM Tech</span>
+              </a>
+            </div>
+          </li>
+
+          <li class="nav__item">
+            <button class="nav__trigger" type="button" aria-expanded="false" aria-controls="dd-duvidas">
+              Dúvidas
+              <svg class="nav__chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+            </button>
+            <div class="nav__dropdown" id="dd-duvidas">
+              <a href="../duvidas/contato.html">
+                Contato
+                <span>Fale com quem desenvolve o produto</span>
+              </a>
+            </div>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="site-header__actions">
+        <a class="btn btn--primary" href="../duvidas/contato.html">
+          Fale com o nosso time
+          <svg class="btn__arrow" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
+
+      <button class="nav-toggle" type="button" id="nav-toggle" aria-expanded="false" aria-controls="drawer">
+        <span></span><span></span><span></span>
+        <span class="sr-only">Abrir menu</span>
+      </button>
+
+    </div>
+  </header>
+
+  <!-- ==================================================== DRAWER MOBILE -->
+  <div class="drawer-overlay" id="drawer-overlay" hidden></div>
+
+  <aside class="drawer" id="drawer" aria-label="Menu" aria-hidden="true">
+    <div class="drawer__head">
+      <span class="brand brand--sm">
+        <img src="../../assets/images/logo.jpg" alt="GJM Tech">
+      </span>
+      <button class="drawer__close" type="button" id="drawer-close">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
+        <span class="sr-only">Fechar menu</span>
+      </button>
+    </div>
+
+    <div class="drawer__group">
+      <a class="drawer__link" href="../index.html">Home</a>
+    </div>
+
+    <div class="drawer__group">
+      <span class="drawer__label">Produtos</span>
+      <a class="drawer__link" href="../produtos/gjm-gestao.html">GJM Gestão</a>
+    </div>
+
+    <div class="drawer__group">
+      <span class="drawer__label">Institucional</span>
+      <a class="drawer__link" href="../institucional/quem-somos.html">Quem Somos</a>
+    </div>
+
+    <div class="drawer__group">
+      <span class="drawer__label">Dúvidas</span>
+      <a class="drawer__link" href="../duvidas/contato.html">Contato</a>
+    </div>
+
+    <a class="btn btn--primary btn--lg" href="../duvidas/contato.html">
+      Fale com o nosso time
+      <svg class="btn__arrow" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a>
+  </aside>
+
+  <main id="conteudo">
+
+    <!-- ==================================================== HERO DA PÁGINA -->
+    <section class="page-hero">
+      <div class="container">
+        <div class="page-hero__inner">
+
+          <nav aria-label="Trilha de navegação">
+            <ol class="breadcrumb">
+              <li><a href="../index.html">Home</a></li>
+              <li><span>Institucional</span></li>
+              <li><span aria-current="page">Quem Somos</span></li>
+            </ol>
+          </nav>
+
+          <span class="eyebrow">Quem Somos</span>
+          <h1>Software de gestão para quem está no balcão</h1>
+
+          <p class="page-hero__lede">
+            A GJM Tech é uma software house dedicada a criar soluções de gestão para
+            pequenos e médios negócios — o comércio que sustenta a rua e raramente
+            aparece na régua de prioridade das grandes empresas de software.
+          </p>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================================================== O QUE FAZEMOS -->
+    <section class="section section--light">
+      <div class="container about__inner">
+
+        <div class="about__text reveal">
+          <span class="eyebrow">O que fazemos</span>
+          <h2 style="margin-bottom:20px">Um problema real de cada vez</h2>
+          <p>
+            Existe muito sistema de gestão no mercado. A maior parte é grande demais,
+            cara demais ou complicada demais para uma loja de roupas, uma gráfica de
+            bairro ou um comércio que toca o dia com duas ou três pessoas.
+          </p>
+          <p>
+            A GJM Tech nasce dessa distância. Nosso trabalho é entender como o negócio
+            funciona de verdade — o caderno do caixa, a planilha do estoque, o programa
+            separado da nota fiscal — e transformar esse improviso num fluxo só.
+          </p>
+          <p>
+            É desse contato direto com o balcão que sai o
+            <a href="../produtos/gjm-gestao.html" style="color:var(--brand-primary);font-weight:600">GJM Gestão</a>,
+            nosso primeiro produto.
+          </p>
+        </div>
+
+        <div class="about__points reveal">
+          <article class="about-point">
+            <h3>Software house</h3>
+            <p>Desenvolvemos produto próprio, não revendemos sistema de terceiros.</p>
+          </article>
+          <article class="about-point">
+            <h3>Foco em PMEs</h3>
+            <p>Pequenos e médios negócios — lojas, gráficas e comércio em geral.</p>
+          </article>
+          <article class="about-point">
+            <h3>Produto em construção</h3>
+            <p>O GJM Gestão está em desenvolvimento e ainda não foi lançado.</p>
+          </article>
+          <article class="about-point">
+            <h3>Conversa direta</h3>
+            <p>Quem desenvolve o produto é quem atende quem entra em contato.</p>
+          </article>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==================================================== COMO TRABALHAMOS -->
+    <section class="section section--light" style="padding-top:0">
+      <div class="container">
+
+        <div class="section-head reveal" style="margin-bottom:clamp(32px,4vw,48px)">
+          <span class="eyebrow">Como trabalhamos</span>
+          <h2>Quatro princípios que guiam o que construímos</h2>
+        </div>
+
+        <div class="principles">
+          <article class="principle reveal">
+            <h3>Entender antes de codar</h3>
+            <p>
+              A primeira etapa nunca é técnica. É sentar com quem vai usar e entender a
+              rotina — o que trava, o que é feito na mão, o que já funciona e não
+              precisa mudar.
+            </p>
+          </article>
+
+          <article class="principle reveal">
+            <h3>Simples é requisito, não enfeite</h3>
+            <p>
+              Interface pensada para o balcão: pouca tela, pouco clique, nenhum
+              treinamento longo. Se precisa de manual para operar, o desenho está
+              errado.
+            </p>
+          </article>
+
+          <article class="principle reveal">
+            <h3>Fazer pouco e fazer bem</h3>
+            <p>
+              Preferimos quatro funcionalidades que funcionam de verdade a vinte pela
+              metade. O produto cresce no ritmo de quem usa, não no ritmo da lista de
+              recursos do concorrente.
+            </p>
+          </article>
+
+          <article class="principle reveal">
+            <h3>Falar o que existe</h3>
+            <p>
+              Comunicamos o que já está pronto e o que ainda está em construção. Sem
+              prazo inventado, sem número de vitrine, sem promessa que não podemos
+              cumprir.
+            </p>
+          </article>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==================================================== O PRODUTO -->
+    <section class="section section--dark">
+      <div class="container control__inner">
+
+        <div class="reveal">
+          <span class="eyebrow">Nosso produto</span>
+          <h2 style="margin-bottom:18px">GJM Gestão</h2>
+          <p style="color:var(--text-muted-dark)">
+            Caixa, estoque, nota fiscal e clientes num sistema só. É onde os princípios
+            acima viram software — e é o que estamos construindo agora.
+          </p>
+
+          <div style="margin-top:30px">
+            <a class="btn btn--primary btn--lg" href="../produtos/gjm-gestao.html">
+              Conhecer o GJM Gestão
+              <svg class="btn__arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="product-showcase reveal">
+          <div class="product-showcase__logo">
+            <img src="../../assets/images/logo_produto.png" alt="GJM Gestão — controle, organização e resultados">
+          </div>
+          <span class="product-showcase__tag">Em desenvolvimento</span>
+        </div>
+
+      </div>
+    </section>
+
+    <!--
+      aguardando informação do usuário: se quiser, dá para acrescentar aqui uma
+      seção com história da empresa (ano de fundação, cidade), time e números
+      reais. Nada disso foi informado ainda, e por isso não foi escrito —
+      inventar esse tipo de dado é justamente o que a skill content-guidelines
+      proíbe.
+    -->
+
+    <!-- ==================================================== CTA FINAL -->
+    <section class="final-cta">
+      <div class="container">
+        <div class="final-cta__box reveal">
+          <h2>Vamos conversar sobre o seu negócio?</h2>
+          <p>
+            Se a sua rotina se parece com o que está descrito aqui, queremos ouvir.
+            É esse retorno que define o que construímos em seguida.
+          </p>
+
+          <div class="final-cta__actions">
+            <a class="btn btn--primary btn--lg" href="../duvidas/contato.html">
+              Fale com o nosso time
+              <svg class="btn__arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </a>
+          </div>
+
+          <!-- Placeholders obrigatórios até o usuário informar os dados reais
+               (ver skill content-guidelines) -->
+          <p class="final-cta__contact">
+            Ou fale direto: <strong>XXXXX@email.com</strong> · <strong>+55 XXXX-XXXX</strong>
+          </p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==================================================== FOOTER -->
+  <footer class="site-footer">
+    <div class="container">
+
+      <div class="site-footer__top">
+        <div class="site-footer__about">
+          <span class="brand brand--lg">
+            <img src="../../assets/images/logo.jpg" alt="GJM Tech">
+          </span>
+          <p>
+            Software house de soluções de gestão para pequenos e médios negócios.
+            Criadora do GJM Gestão.
+          </p>
+        </div>
+
+        <div class="site-footer__cols">
+          <div>
+            <h4>Produtos</h4>
+            <ul>
+              <li><a href="../produtos/gjm-gestao.html">GJM Gestão</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Institucional</h4>
+            <ul>
+              <li><a href="../institucional/quem-somos.html">Quem Somos</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Dúvidas</h4>
+            <ul>
+              <li><a href="../duvidas/contato.html">Contato</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Contato</h4>
+            <ul>
+              <li><a href="mailto:XXXXX@email.com">XXXXX@email.com</a></li>
+              <li><a href="tel:+55XXXXXXXX">+55 XXXX-XXXX</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="site-footer__bottom">
+        <p>© <span id="ano">2026</span> GJM Tech. Todos os direitos reservados.</p>
+        <p>Feito no Brasil 🇧🇷</p>
+      </div>
+
+    </div>
+  </footer>
+
+  <script type="module" src="../scripts/main.js"></script>
+</body>
+</html>
