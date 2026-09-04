@@ -18,84 +18,101 @@ Análise feita quadro a quadro a partir do vídeo de referência enviado pelo us
 
 **O elemento não existe no mobile.** Nos frames mobile analisados, os dois cards do hero aparecem simplesmente empilhados verticalmente, sem o elemento 3D e sem nenhum efeito de paralaxe associado a ele. Isso deve ser tratado como remoção completa via media query — não apenas ocultação visual (`opacity: 0` ainda deixaria o elemento no fluxo/DOM ocupando espaço ou custando performance).
 
-## Adaptação para GJM Tech — DECIDIDO: moeda
+## Adaptação para GJM Tech — DECIDIDO: lâmpada
 
-O elemento é uma **moeda** (definido pelo usuário em 2026-09-04). Histórico das versões
-descartadas, para não voltar atrás: moeda do Revio → lâmpada → **moeda de novo**, agora
-tematizada como dinheiro (face verde com cifrão "R$"), ligando com "Controle de Caixa".
+O elemento é uma **lâmpada**. Histórico das versões, para não ficar rodando em círculo:
+moeda do Revio → lâmpada → moeda com "R$" → **lâmpada de novo** (definido pelo usuário em
+2026-09-04, e é esta que vale).
 
 Implementação atual em `src/index.html` (`#hero-decor`):
 
 - Desenhada como **SVG inline**, não como arquivo de imagem — respeita a regra do
   `CLAUDE.md` de não gerar nem baixar assets, e já funciona sem depender de nada externo.
-- Vista em ângulo: duas elipses sobrepostas (a de baixo, mais escura, faz a espessura).
-  Face em degradê `--accent-mint` → `--accent-green`, friso interno, brilho especular
-  branco e "R$" em verde escuro.
-- Verde e não menta/coral (os tokens originais do Revio) porque ela precisa ter contraste
-  **nos dois fundos**: o hero escuro e o card claro onde ela vai parar.
+- Vidro em degradê `--accent-mint` → `--brand-primary`, filamento em `--accent-coral`,
+  rosca em cinza metálico, halo azul via `radialGradient`.
 
-## Ponto de parada: a moeda VIRA o ícone do card
+## O palco do hero tem TRÊS cards
 
-O elemento **não desce a página inteira**. Ele desce com o atraso do paralaxe até pousar
-**dentro do ícone** do primeiro card de funcionalidades (`#dock-moeda`, no card "Controle
-de caixa"), encolhe até o tamanho da caixa do ícone e **assume o lugar dele** — o chip
-colorido e o desenho original somem. Depois disso a moeda não se move mais em relação à
-página.
+Mudança estrutural pedida pelo usuário: além dos dois cards de conteúdo, existe um
+**terceiro card vazio no meio**, que serve só de destino para a lâmpada.
+
+```
+[ Controle de caixa ]  [ vazio: destino ]  [ Controle de estoque ]
+      escuro              translúcido            claro
+```
+
+- Grid em `1fr 0.58fr 1fr` no desktop (`home.css`), `max-width: 1040px`.
+- O card do meio (`.hero-card--slot`, `#dock-lampada`) é **translúcido** de propósito:
+  a lâmpada fica ATRÁS dos três cards, e é através dele que ela continua visível.
+- Ele **não flutua**, ao contrário dos vizinhos. Se flutuasse, a lâmpada — posicionada em
+  relação ao palco e não ao card — descolaria dele ao pousar.
+- No mobile ele é `display: none`: um card vazio empilhado não faz sentido, e a lâmpada
+  também não existe ali.
+
+## Comportamento: nasce grande atrás, pousa dentro do card
+
+1. **Em repouso** a lâmpada é grande (`clamp(150px, 16vw, 232px)`), centralizada, ancorada
+   ao topo do palco (`top: -152px`) — ou seja, nasce no vão entre a headline e a fileira
+   de cards. O `margin-top` do palco foi aumentado para `clamp(56px, 12vw, 176px)`
+   exatamente para abrir esse vão sem que ela encoste no título.
+2. **z-index 1**: atrás dos três cards (que estão no 3) e à frente do fundo do hero.
+   `.hero__intro` recebeu `position: relative; z-index: 2` para o texto ficar por cima.
+3. **Ao rolar** ela desce mais devagar que o scroll e encolhe, até **parar** centralizada
+   dentro do card vazio. Depois disso não se move mais.
 
 Como está implementado (`initHeroParallax` em `src/scripts/main.js`):
 
-- `measure()` calcula, em coordenadas absolutas da página, o vetor entre o centro da moeda
-  em repouso e o centro do ícone de destino, mais a escala final:
-  `escalaFinal = (largura do ícone * DOCK_FILL) / largura da moeda`. Medir em vez de
-  cravar um número faz o efeito sobreviver a mudanças de tamanho no CSS.
+- `measure()` calcula o vetor entre o centro da lâmpada em repouso e o centro do card de
+  destino, em coordenadas absolutas da página, mais a escala final. A escala é o **menor**
+  entre caber pela largura e caber pela altura (`DOCK_FILL_X` / `DOCK_FILL_Y`) — a lâmpada
+  é bem mais alta que larga, então normalmente é a altura que manda. Medir em vez de cravar
+  um número faz o efeito sobreviver a mudanças de tamanho no CSS.
 - `render()` converte o scroll em um progresso `0 → 1`, travado em 1:
-  `progresso = min(scrollY * PARALLAX_SPEED / dy, 1)`. É o `min` que faz a moeda parar.
-- Passando de `DOCK_SWAP_AT` (0.97), o ícone de destino ganha a classe `is-taken`, que
-  zera a opacidade do SVG original e deixa o fundo do chip transparente. A classe é
-  removida ao rolar de volta para cima, e em `disable()`.
-- O trajeto é remedido no `resize` (com debounce) e no `load`, porque fontes e imagens que
-  chegam depois deslocam o ícone de destino.
+  `progresso = min(scrollY * PARALLAX_SPEED / dy, 1)`. É o `min` que faz a lâmpada parar.
+- `PARALLAX_SPEED` está em `0.28` (mais lento que os 0.45 originais) porque o trajeto é
+  curto: com 0.45 ela pousava rápido demais para o movimento ser percebido.
+- `measure()` roda de novo no `resize` (com debounce) e no `load`, porque fontes e imagens
+  que chegam depois deslocam o card de destino. Também checa `dock.offsetParent === null`
+  para detectar que o card está oculto (mobile) e cair no paralaxe simples.
 
-Para trocar o card de destino, basta mover o `id="dock-moeda"` para o `.feature-card__icon`
-de outro card — o cálculo se adapta sozinho.
+Como a lâmpada nunca sai do hero, `.hero` voltou a ter `overflow: hidden`.
 
-## Posição de repouso: não pode cobrir texto
+## Regra permanente: não cobre texto
 
-Regra do usuário: o elemento **não fica na frente de nenhum texto**. Por isso a moeda
-descansa *abaixo* dos dois cards do hero (`bottom: -126px`), encostada na base deles, e
-deslocada para a esquerda (`left: 14%`) para sair da largura da legenda centralizada que
-vem logo abaixo. Ao mexer no tamanho dos cards ou dessa legenda, conferir de novo se ela
-continua livre.
+O elemento **não fica na frente de nenhum texto**. Isso é garantido por duas coisas ao
+mesmo tempo: o z-index 1 (abaixo de cards e do texto do hero) e a posição de repouso
+dentro do vão. Ao mexer no tamanho da headline ou dos cards, conferir de novo.
 
 ### Se o usuário fornecer um asset próprio
 
-`src/scripts/main.js` (`initHeroDecorAsset`) tenta carregar **`assets/hero/moeda.png`**.
+`src/scripts/main.js` (`initHeroDecorAsset`) tenta carregar **`assets/hero/lampada.png`**.
 Se o arquivo existir, ele substitui o SVG inline automaticamente; se não existir, o SVG permanece
 e nenhum erro é exibido. Ou seja: basta o usuário colocar o arquivo nesse caminho, sem tocar no código.
 
 ## Implementação técnica (vanilla JS, sem dependências)
 
 ```js
-// Implementação real: src/scripts/main.js > initHeroParallax()
+// Recorte de src/scripts/main.js > initHeroParallax()
 const decor = document.getElementById('hero-decor');
-const desktop = window.matchMedia('(min-width: 768px)');
-const speed = 0.45; // < 1 = mais lento que o scroll real (efeito de "atraso")
+const dock  = document.getElementById('dock-lampada');  // card vazio do meio
+const speed = 0.28;  // < 1 = mais lento que o scroll real (efeito de "atraso")
 let ticking = false;
+let dx = 0, dy = 0, escalaFinal = 1;   // preenchidos por measure()
 
 const render = () => {
-  decor.style.transform = `translateY(${window.scrollY * speed}px)`;
+  // trava em 1 ao chegar no card: é isto que faz a lâmpada PARAR
+  const progresso = Math.min((window.scrollY * speed) / dy, 1);
+  const escala = 1 + (escalaFinal - 1) * progresso;
+  decor.style.transform =
+    `translate(${dx * progresso}px, ${dy * progresso}px) scale(${escala})`;
   ticking = false;
 };
 
 const onScroll = () => {
   if (ticking) return;
   ticking = true;
-  requestAnimationFrame(render); // evita jank
+  requestAnimationFrame(render);   // evita jank
 };
-
-// Só liga no desktop, e desliga se o usuário pedir "reduzir movimento".
-// O listener de `change` do matchMedia religa/desliga ao redimensionar.
-if (desktop.matches) window.addEventListener('scroll', onScroll, { passive: true });
 ```
 
 > O posicionamento base usa a propriedade `translate` (`translate: -50% 0`) e o paralaxe usa
@@ -105,16 +122,28 @@ if (desktop.matches) window.addEventListener('scroll', onScroll, { passive: true
 ```css
 .hero-decor {
   position: absolute;
-  z-index: 5; /* acima do fundo do hero */
+  z-index: 1;        /* ATRÁS dos cards (z-index 3) e do texto do hero (2) */
+  top: -152px;       /* nasce no vão entre a headline e a fileira de cards */
+  left: 50%;
+  translate: -50% 0;
+  width: clamp(150px, 16vw, 232px);
   pointer-events: none;
   will-change: transform;
 }
 
 @media (max-width: 767px) {
   .hero-decor {
-    display: none; /* remove completamente no mobile, conforme observado */
+    display: none;   /* removida por completo no mobile, conforme observado */
   }
 }
 ```
 
-> Usar `requestAnimationFrame` (ou throttle) no listener de scroll se a página acumular outras animações simultâneas, para evitar jank.
+> Usar `requestAnimationFrame` (ou throttle) no listener de scroll se a página acumular
+> outras animações simultâneas, para evitar jank.
+
+## Cuidado com a seção "Comportamento observado" no topo deste arquivo
+
+Os itens 3 e 4 daquela lista descrevem o **template Revio**, não o que o site faz hoje.
+Na GJM Tech o elemento **não** atravessa para a seção seguinte nem passa por cima do
+conteúdo: ele para dentro do card do meio e fica atrás de tudo. Mantidos ali só como
+registro da referência original.

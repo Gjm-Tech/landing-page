@@ -97,7 +97,8 @@ Regras que vieram junto:
 
 - **Botão primário**: fundo `--brand-primary`, texto branco, radius 10px, padding ~12px 20px, ícone de seta "→" à direita
 - **Badge/eyebrow**: pequeno ponto/ícone colorido + texto cinza claro, usado acima de títulos de seção
-- **Card flutuante (hero)**: radius 16px, sombra pronunciada, leve profundidade/inclinação (não totalmente flat) — na referência há 2 cards flutuantes no hero (um escuro tipo cartão, outro claro tipo "saldo em conta"). Os dois **flutuam** de verdade: `@keyframes float-dark` (6s) e `float-light` (7s) em `home.css`. A inclinação usa a propriedade `rotate` e a flutuação usa `translate`, justamente para que uma não sobrescreva a outra.
+- **Palco do hero**: **três** cards no desktop — conteúdo | vazio | conteúdo. O do meio (`.hero-card--slot`) é translúcido e existe só como destino da lâmpada do paralaxe; some no mobile. Ver a skill `parallax-hero-effect`.
+- **Card flutuante (hero)**: radius 16px, sombra pronunciada, leve profundidade/inclinação (não totalmente flat) — os dois cards de conteúdo **flutuam** de verdade (o do meio não): `@keyframes float-dark` (6s) e `float-light` (7s) em `home.css`. A inclinação usa a propriedade `rotate` e a flutuação usa `translate`, justamente para que uma não sobrescreva a outra.
 - **CTA final**: painel **escuro compacto** com borda de 1px sobre a seção branca — não é bloco azul com degradê. O destaque vem do contraste, não do tamanho.
 - **Header**: fixo/sticky; transparente no topo do hero, ganha fundo escuro semi-opaco + leve blur ao rolar
 

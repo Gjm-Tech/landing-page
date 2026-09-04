@@ -137,7 +137,6 @@
         <div class="hero__intro">
           <h1>A gestão do seu negócio <em>organizada num lugar só</em></h1>
 
-          
         </div>
 
         <div class="hero__stage">
@@ -160,6 +159,11 @@
               <i style="height:66%"></i>
             </div>
           </article>
+
+          <!-- Card vazio do meio: existe só para a lâmpada pousar dentro dele.
+               É translúcido de propósito — a lâmpada fica ATRÁS dos cards e
+               precisa continuar visível através deste. -->
+          <div class="hero-card hero-card--slot" id="dock-lampada" aria-hidden="true"></div>
 
           <!-- Card claro — Controle de Estoque -->
           <article class="hero-card hero-card--light">
@@ -187,11 +191,13 @@
 
           <!--
             Elemento decorativo com paralaxe — lâmpada. Só desktop.
+            Começa grande e ATRÁS dos cards; ao rolar, desce e encolhe até
+            parar dentro do card vazio do meio (#dock-lampada).
             Ver .claude/skills/parallax-hero-effect/SKILL.md
 
-            Desenhado em SVG inline (nenhum arquivo de imagem é gerado ou baixado).
-            aguardando asset: se `assets/hero/lampada.png` existir, o main.js
-            troca este SVG pela imagem automaticamente.
+            Desenhada em SVG inline (nenhum arquivo de imagem é gerado ou
+            baixado). aguardando asset: se `assets/hero/lampada.png` existir,
+            o main.js troca este SVG pela imagem automaticamente.
           -->
           <div class="hero-decor" id="hero-decor" aria-hidden="true">
             <svg class="hero-decor__svg" viewBox="0 0 120 170" fill="none" role="presentation">
@@ -258,9 +264,7 @@
 
         <div class="features__grid">
 
-          <!-- id="dock-lampada": destino onde a lâmpada do hero para de descer
-               (ver initHeroParallax em scripts/main.js) -->
-          <article class="feature-card reveal" id="dock-lampada">
+          <article class="feature-card reveal">
             <div class="feature-card__icon" style="background:var(--accent-mint)">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2.5"/><path d="M6 12h.01M18 12h.01"/></svg>
             </div>
