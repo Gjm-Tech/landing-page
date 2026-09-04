@@ -6,7 +6,7 @@
 
 .hero {
   position: relative;
-  /* Sem `overflow: hidden` de propósito: a lâmpada do paralaxe precisa
+  /* Sem `overflow: hidden` de propósito: a moeda do paralaxe precisa
      "atravessar" para fora do hero e sobrepor a seção clara seguinte.
      O brilho do ::before já se dissolve antes da borda, então não vaza. */
   background: var(--bg-dark);
@@ -207,20 +207,21 @@
   color: var(--text-muted-dark);
 }
 
-/* --- Elemento decorativo (lâmpada) com paralaxe --- */
+/* --- Elemento decorativo (moeda) com paralaxe --- */
 /*     ver .claude/skills/parallax-hero-effect/SKILL.md                     */
 
 .hero-decor {
   position: absolute;
   z-index: 5;
-  bottom: -40px;
+  /* Fica abaixo dos dois cards, encostada na base deles: assim não cobre
+     nenhum texto na posição de repouso. */
+  bottom: -126px;
   left: 50%;
   translate: -50% 0;
-  width: clamp(132px, 13vw, 186px);
+  width: clamp(104px, 9.5vw, 136px);
   pointer-events: none;
   will-change: transform;
-  filter: drop-shadow(0 24px 36px rgba(0, 0, 0, 0.55))
-          drop-shadow(0 0 42px rgba(59, 139, 255, 0.42));
+  filter: drop-shadow(0 10px 18px rgba(0, 0, 0, 0.38));
 }
 
 .hero-decor svg,
@@ -228,18 +229,6 @@
   display: block;
   width: 100%;
   height: auto;
-  /* leve inclinação: o elemento é visto em ângulo, como na referência */
-  rotate: -8deg;
-}
-
-/* Respiro do brilho da lâmpada — sutil, não pisca */
-.hero-decor__svg {
-  animation: bulb-breathe 4.5s var(--ease) infinite;
-}
-
-@keyframes bulb-breathe {
-  0%, 100% { opacity: 1; }
-  50%      { opacity: 0.9; }
 }
 
 @media (max-width: 767px) {
@@ -266,10 +255,11 @@
   .hero-card--light { rotate: 1.2deg;  animation: float-light 7s var(--ease) infinite; }
 
   .hero-decor {
-    /* deslocada para a esquerda: sobrepõe o gráfico do card escuro,
-       não o texto do card claro */
-    left: 44%;
-    bottom: -74px;
+    /* deslocada para a esquerda, fora da largura do texto centralizado
+       logo abaixo — e já apontando para o card de destino, que é o
+       primeiro da grade de funcionalidades */
+    left: 14%;
+    bottom: -126px;
   }
 }
 
@@ -311,6 +301,22 @@
 .feature-card__icon svg {
   width: 26px;
   height: 26px;
+  transition: opacity 220ms var(--ease);
+}
+
+/* Quando a moeda pousa, ela VIRA o ícone: o chip colorido e o desenho
+   original saem de cena e sobra só a moeda no lugar.
+   A classe é ligada/desligada por initHeroParallax em scripts/main.js. */
+.feature-card__icon {
+  transition: background-color 220ms var(--ease);
+}
+
+.feature-card__icon.is-taken {
+  background: transparent !important;
+}
+
+.feature-card__icon.is-taken svg {
+  opacity: 0;
 }
 
 .feature-card h3 {
@@ -500,34 +506,29 @@
   background: var(--bg-white);
 }
 
+/* Painel escuro compacto: destaque vem do contraste com a seção branca,
+   não do tamanho do bloco nem de degradê. */
 .final-cta__box {
-  position: relative;
-  overflow: hidden;
-  padding: clamp(40px, 6vw, 76px) clamp(24px, 5vw, 64px);
-  border-radius: clamp(var(--radius-lg), 2vw, 28px);
-  background: linear-gradient(140deg, var(--brand-primary) 0%, var(--brand-deep) 100%);
+  max-width: 860px;
+  margin-inline: auto;
+  padding: clamp(32px, 4vw, 52px) clamp(24px, 4vw, 48px);
+  border-radius: var(--radius-lg);
+  background: var(--bg-dark);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   color: var(--text-white);
   text-align: center;
 }
 
-.final-cta__box::after {
-  content: '';
-  position: absolute;
-  right: -8%;
-  bottom: -60%;
-  width: 460px;
-  aspect-ratio: 1;
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.16) 0%, transparent 65%);
-  pointer-events: none;
+.final-cta__box h2 {
+  font-size: clamp(1.5rem, 1.2rem + 1.35vw, 2rem);
 }
 
-.final-cta__box > * { position: relative; z-index: 2; }
-
 .final-cta__box p {
-  margin-top: 18px;
+  margin-top: 14px;
   margin-inline: auto;
-  max-width: 56ch;
-  color: rgba(255, 255, 255, 0.86);
+  max-width: 52ch;
+  font-size: var(--fs-small);
+  color: var(--text-muted-dark);
 }
 
 .final-cta__actions {
@@ -535,22 +536,13 @@
   flex-wrap: wrap;
   justify-content: center;
   gap: 12px;
-  margin-top: 34px;
-}
-
-.final-cta .btn--primary {
-  background: var(--bg-white);
-  color: var(--brand-primary);
-}
-
-.final-cta .btn--primary:hover {
-  background: #EFF4FF;
+  margin-top: 26px;
 }
 
 .final-cta__contact {
-  margin-top: 30px;
-  font-size: var(--fs-small);
-  color: rgba(255, 255, 255, 0.8);
+  margin-top: 22px;
+  font-size: 0.875rem;
+  color: var(--text-muted-dark);
 }
 
 .final-cta__contact strong {

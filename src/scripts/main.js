@@ -117,36 +117,37 @@ function initDrawer() {
 }
 
 /* --------------------------------------------------------------------------
-   4. Paralaxe da lâmpada do hero — SOMENTE desktop
+   4. Paralaxe da moeda do hero — SOMENTE desktop
 
-   A lâmpada desce mais devagar que o scroll (efeito de "atraso") e PARA ao
-   pousar no primeiro card de funcionalidades (#dock-lampada). Depois disso
-   ela não se move mais: fica presa no card e sobe junto com a página, em vez
-   de acompanhar o scroll até o rodapé.
+   A moeda desce mais devagar que o scroll (efeito de "atraso") e PARA dentro
+   do ícone do card "Controle de caixa" (#dock-moeda) — encolhendo até o
+   tamanho dele e assumindo o lugar do ícone original, que sai de cena.
+   Depois disso ela não se move mais em relação à página.
    Ver .claude/skills/parallax-hero-effect/SKILL.md
    -------------------------------------------------------------------------- */
 
-const PARALLAX_SPEED = 0.45; // < 1 = mais lento que o scroll real
-const DOCK_SCALE = 0.55;     // tamanho da lâmpada ao pousar no card
-const DOCK_INSET_X = 38;     // distância da borda direita do card, em px
-const DOCK_INSET_Y = 26;     // distância do topo do card, em px
+const PARALLAX_SPEED = 0.45;   // < 1 = mais lento que o scroll real
+const DOCK_FILL = 0.82;        // quanto da caixa do ícone a moeda ocupa ao pousar
+const DOCK_SWAP_AT = 0.97;     // progresso em que o ícone original cede o lugar
 
 function initHeroParallax() {
   const decor = document.getElementById('hero-decor');
   if (!decor) return;
 
-  const dock = document.getElementById('dock-lampada');
+  const dock = document.getElementById('dock-moeda');
   const desktop = window.matchMedia('(min-width: 768px)');
 
   let ticking = false;
   let active = false;
   let dx = 0;
   let dy = 0;
+  let escalaFinal = 1;
 
-  // Mede o trajeto entre a posição de repouso da lâmpada e o ponto de pouso
-  // (canto superior direito do card), em coordenadas absolutas da página.
+  // Mede o trajeto entre o centro da moeda em repouso e o centro do ícone de
+  // destino, em coordenadas absolutas da página, e o quanto ela precisa
+  // encolher para caber na caixa do ícone.
   const measure = () => {
-    if (!dock) { dx = 0; dy = 0; return; }
+    if (!dock) { dx = 0; dy = 0; escalaFinal = 1; return; }
 
     const anterior = decor.style.transform;
     decor.style.transform = 'none';
@@ -155,26 +156,34 @@ function initHeroParallax() {
     const destino = dock.getBoundingClientRect();
     const scrollY = window.scrollY;
 
-    dx = (destino.right - DOCK_INSET_X) - (origem.left + origem.width / 2);
-    dy = (destino.top + scrollY + DOCK_INSET_Y) - (origem.top + scrollY + origem.height / 2);
+    dx = (destino.left + destino.width / 2) - (origem.left + origem.width / 2);
+    dy = (destino.top + scrollY + destino.height / 2)
+       - (origem.top + scrollY + origem.height / 2);
+
+    escalaFinal = origem.width > 0
+      ? (destino.width * DOCK_FILL) / origem.width
+      : 1;
 
     decor.style.transform = anterior;
   };
 
   const render = () => {
-    // Sem card de destino, mantém o paralaxe simples de antes.
+    // Sem ícone de destino, mantém só o paralaxe vertical.
     if (dy <= 0) {
       decor.style.transform = `translateY(${window.scrollY * PARALLAX_SPEED}px)`;
       ticking = false;
       return;
     }
 
-    // 0 = parada no hero, 1 = pousada no card. Trava em 1: é aqui que ela para.
+    // 0 = parada no hero, 1 = pousada no ícone. Trava em 1: é aqui que ela para.
     const progresso = Math.min((window.scrollY * PARALLAX_SPEED) / dy, 1);
-    const escala = 1 + (DOCK_SCALE - 1) * progresso;
+    const escala = 1 + (escalaFinal - 1) * progresso;
 
     decor.style.transform =
       `translate(${dx * progresso}px, ${dy * progresso}px) scale(${escala})`;
+
+    // No fim do trajeto a moeda VIRA o ícone do card.
+    dock?.classList.toggle('is-taken', progresso >= DOCK_SWAP_AT);
 
     ticking = false;
   };
@@ -198,6 +207,7 @@ function initHeroParallax() {
     active = false;
     window.removeEventListener('scroll', onScroll);
     decor.style.transform = '';
+    dock?.classList.remove('is-taken');
   };
 
   const sync = () => {
@@ -217,7 +227,7 @@ function initHeroParallax() {
     }, 150);
   });
 
-  // Fontes e imagens chegando depois deslocam o card de destino.
+  // Fontes e imagens chegando depois deslocam o ícone de destino.
   window.addEventListener('load', () => {
     if (!active) return;
     measure();
@@ -230,13 +240,13 @@ function initHeroParallax() {
 }
 
 /* --------------------------------------------------------------------------
-   5. Troca do SVG da lâmpada pelo asset real, se o usuário fornecer um
-      (assets/hero/lampada.png). Enquanto o arquivo não existir, o SVG fica.
+   5. Troca do SVG da moeda pelo asset real, se o usuário fornecer um
+      (assets/hero/moeda.png). Enquanto o arquivo não existir, o SVG fica.
    -------------------------------------------------------------------------- */
 
 // Resolvido a partir da URL do próprio script (src/scripts/main.js), não da
 // página — assim funciona igual na Home e nas páginas dentro de subpastas.
-const HERO_DECOR_ASSET = new URL('../../assets/hero/lampada.png', import.meta.url).href;
+const HERO_DECOR_ASSET = new URL('../../assets/hero/moeda.png', import.meta.url).href;
 
 function initHeroDecorAsset() {
   const decor = document.getElementById('hero-decor');

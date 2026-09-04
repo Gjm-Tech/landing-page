@@ -36,6 +36,35 @@ Tokens extraídos por amostragem de pixel dos frames do vídeo de referência (t
 
 Contraste: `#0A63E0` com texto branco = ~5.4:1 → passa WCAG AA para texto normal.
 
+> ⚠️ **O azul NÃO é cor de botão** (decidido com o usuário em 2026-09-04, depois de duas
+> rodadas de ajuste). Botão azul chapado foi lido como "cara de template gerado por IA".
+> O azul ficou reservado para **acento**: eyebrows, links, ícones, foco de campo,
+> numeração, barras de gráfico e selos. Ver a seção "Botões" abaixo.
+
+### Botões (tokens contextuais)
+
+O botão principal é **invertido em relação ao fundo** — branco sobre superfície escura,
+quase-preto sobre superfície clara. Nunca azul.
+
+| Token | Superfície clara (padrão) | Superfície escura |
+|---|---|---|
+| `--btn-bg` | `#111111` | `#FFFFFF` |
+| `--btn-fg` | `#FFFFFF` | `#111111` |
+| `--btn-bg-hover` | `#2C2C2E` | `#E4E4E6` |
+
+O padrão vem de `:root` em `tokens.css`. A inversão é declarada uma única vez em
+`components.css`, nos containers escuros (`.site-header`, `.drawer`, `.hero`, `.page-hero`,
+`.section--dark`, `.final-cta__box`, `.site-footer`). Como são custom properties, todo
+`.btn--primary` dentro deles herda sozinho — **não existe classe de variante no HTML**.
+Ao criar uma seção escura nova, basta acrescentá-la a essa lista.
+
+Regras que vieram junto:
+
+- **Sem sombra colorida** embaixo de botão. O halo azul era o principal sinal de "template pronto".
+- **Sem `translateY` no hover.** O hover só troca a cor de fundo.
+- Raio de 8px.
+- **Sem texto com degradê** em títulos — usar cor chapada (`--brand-bright` sobre escuro).
+
 ### Acento (ícones de feature / elemento decorativo do hero)
 
 | Token | Valor | Uso |
@@ -68,7 +97,8 @@ Contraste: `#0A63E0` com texto branco = ~5.4:1 → passa WCAG AA para texto norm
 
 - **Botão primário**: fundo `--brand-primary`, texto branco, radius 10px, padding ~12px 20px, ícone de seta "→" à direita
 - **Badge/eyebrow**: pequeno ponto/ícone colorido + texto cinza claro, usado acima de títulos de seção
-- **Card flutuante (hero)**: radius 16px, sombra pronunciada, leve profundidade/inclinação (não totalmente flat) — na referência há 2 cards flutuantes no hero (um escuro tipo cartão, outro claro tipo "saldo em conta")
+- **Card flutuante (hero)**: radius 16px, sombra pronunciada, leve profundidade/inclinação (não totalmente flat) — na referência há 2 cards flutuantes no hero (um escuro tipo cartão, outro claro tipo "saldo em conta"). Os dois **flutuam** de verdade: `@keyframes float-dark` (6s) e `float-light` (7s) em `home.css`. A inclinação usa a propriedade `rotate` e a flutuação usa `translate`, justamente para que uma não sobrescreva a outra.
+- **CTA final**: painel **escuro compacto** com borda de 1px sobre a seção branca — não é bloco azul com degradê. O destaque vem do contraste, não do tamanho.
 - **Header**: fixo/sticky; transparente no topo do hero, ganha fundo escuro semi-opaco + leve blur ao rolar
 
 ## Logos

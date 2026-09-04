@@ -30,12 +30,27 @@
 }
 
 .btn--primary {
-  background: var(--brand-primary);
-  color: var(--text-white);
+  background: var(--btn-bg);
+  color: var(--btn-fg);
 }
 
 .btn--primary:hover {
-  background: var(--brand-primary-hover);
+  background: var(--btn-bg-hover);
+}
+
+/* Superfícies escuras invertem o botão: fica branco com texto quase-preto.
+   Como são custom properties, basta declarar no container — todo botão
+   dentro dele herda, sem precisar de classe extra no HTML. */
+.site-header,
+.drawer,
+.hero,
+.page-hero,
+.section--dark,
+.final-cta__box,
+.site-footer {
+  --btn-bg: var(--text-white);
+  --btn-fg: var(--text-dark);
+  --btn-bg-hover: #E4E4E6;
 }
 
 .btn--ghost-light {

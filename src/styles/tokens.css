@@ -24,6 +24,14 @@
   --brand-bright: #3B8BFF;
   --brand-deep: #0D43A3;
 
+  /* --- Botão principal (invertido em relação ao fundo) ---
+     Padrão = superfície clara, então o botão é quase-preto.
+     Sobre superfícies escuras, os 3 tokens são invertidos em components.css.
+     O azul da marca deixa de ser cor de botão e fica só como acento. */
+  --btn-bg: #111111;
+  --btn-fg: #FFFFFF;
+  --btn-bg-hover: #2C2C2E;
+
   /* --- Acentos (ícones de feature / decorativos) --- */
   --accent-mint: #9FD8D6;
   --accent-coral: #F4948F;

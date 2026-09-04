@@ -18,45 +18,58 @@ Análise feita quadro a quadro a partir do vídeo de referência enviado pelo us
 
 **O elemento não existe no mobile.** Nos frames mobile analisados, os dois cards do hero aparecem simplesmente empilhados verticalmente, sem o elemento 3D e sem nenhum efeito de paralaxe associado a ele. Isso deve ser tratado como remoção completa via media query — não apenas ocultação visual (`opacity: 0` ainda deixaria o elemento no fluxo/DOM ocupando espaço ou custando performance).
 
-## Adaptação para GJM Tech — DECIDIDO: lâmpada
+## Adaptação para GJM Tech — DECIDIDO: moeda
 
-O elemento é uma **lâmpada** (definido pelo usuário em 2026-09-04). Não é mais a moeda do Revio,
-nem caixa registradora, nem pilha de notas — essas hipóteses estão descartadas.
+O elemento é uma **moeda** (definido pelo usuário em 2026-09-04). Histórico das versões
+descartadas, para não voltar atrás: moeda do Revio → lâmpada → **moeda de novo**, agora
+tematizada como dinheiro (face verde com cifrão "R$"), ligando com "Controle de Caixa".
 
 Implementação atual em `src/index.html` (`#hero-decor`):
 
-- Desenhada como **SVG inline**, não como arquivo de imagem — respeita a regra do `CLAUDE.md`
-  de não gerar nem baixar assets, e já funciona sem depender de nada externo.
-- Paleta usando tokens existentes: vidro em degradê `--accent-mint` → `--brand-bright` → `--brand-primary`,
-  filamento em `--accent-coral`, rosca em cinza metálico. Halo azul via `drop-shadow`.
-- Inclinada ~8° (`rotate: -8deg`) para reproduzir o "visto em ângulo" da referência.
-- Animação `bulb-breathe`: variação sutil de opacidade (1 → 0.9), 4.5s. Não pisca.
+- Desenhada como **SVG inline**, não como arquivo de imagem — respeita a regra do
+  `CLAUDE.md` de não gerar nem baixar assets, e já funciona sem depender de nada externo.
+- Vista em ângulo: duas elipses sobrepostas (a de baixo, mais escura, faz a espessura).
+  Face em degradê `--accent-mint` → `--accent-green`, friso interno, brilho especular
+  branco e "R$" em verde escuro.
+- Verde e não menta/coral (os tokens originais do Revio) porque ela precisa ter contraste
+  **nos dois fundos**: o hero escuro e o card claro onde ela vai parar.
 
-### Ponto de parada: a lâmpada POUSA num card (definido pelo usuário em 2026-09-04)
+## Ponto de parada: a moeda VIRA o ícone do card
 
 O elemento **não desce a página inteira**. Ele desce com o atraso do paralaxe até pousar
-no primeiro card de funcionalidades da Home (`#dock-lampada` = "Controle de caixa") e
-**para ali**. Depois disso não se move mais em relação à página: fica preso no canto
-superior direito do card e sobe junto com ele no scroll.
+**dentro do ícone** do primeiro card de funcionalidades (`#dock-moeda`, no card "Controle
+de caixa"), encolhe até o tamanho da caixa do ícone e **assume o lugar dele** — o chip
+colorido e o desenho original somem. Depois disso a moeda não se move mais em relação à
+página.
 
 Como está implementado (`initHeroParallax` em `src/scripts/main.js`):
 
-- `measure()` calcula, em coordenadas absolutas da página, o vetor entre o centro da
-  lâmpada em repouso e o ponto de pouso (canto superior direito do card, recuado por
-  `DOCK_INSET_X` / `DOCK_INSET_Y`).
+- `measure()` calcula, em coordenadas absolutas da página, o vetor entre o centro da moeda
+  em repouso e o centro do ícone de destino, mais a escala final:
+  `escalaFinal = (largura do ícone * DOCK_FILL) / largura da moeda`. Medir em vez de
+  cravar um número faz o efeito sobreviver a mudanças de tamanho no CSS.
 - `render()` converte o scroll em um progresso `0 → 1`, travado em 1:
-  `progresso = min(scrollY * PARALLAX_SPEED / dy, 1)`. É o `min` que faz a lâmpada parar.
-- O deslocamento horizontal e a escala (`1 → DOCK_SCALE`, hoje `0.55`) acompanham o mesmo
-  progresso, então ela "cai" na diagonal e encolhe até assentar no card.
-- O trajeto é remedido no `resize` (com debounce) e no `load`, porque fontes e imagens
-  que chegam depois deslocam o card de destino.
+  `progresso = min(scrollY * PARALLAX_SPEED / dy, 1)`. É o `min` que faz a moeda parar.
+- Passando de `DOCK_SWAP_AT` (0.97), o ícone de destino ganha a classe `is-taken`, que
+  zera a opacidade do SVG original e deixa o fundo do chip transparente. A classe é
+  removida ao rolar de volta para cima, e em `disable()`.
+- O trajeto é remedido no `resize` (com debounce) e no `load`, porque fontes e imagens que
+  chegam depois deslocam o ícone de destino.
 
-Para trocar o card de destino, basta mover o `id="dock-lampada"` para outro elemento —
-o cálculo se adapta sozinho.
+Para trocar o card de destino, basta mover o `id="dock-moeda"` para o `.feature-card__icon`
+de outro card — o cálculo se adapta sozinho.
+
+## Posição de repouso: não pode cobrir texto
+
+Regra do usuário: o elemento **não fica na frente de nenhum texto**. Por isso a moeda
+descansa *abaixo* dos dois cards do hero (`bottom: -126px`), encostada na base deles, e
+deslocada para a esquerda (`left: 14%`) para sair da largura da legenda centralizada que
+vem logo abaixo. Ao mexer no tamanho dos cards ou dessa legenda, conferir de novo se ela
+continua livre.
 
 ### Se o usuário fornecer um asset próprio
 
-`src/scripts/main.js` (`initHeroDecorAsset`) tenta carregar **`assets/hero/lampada.png`**.
+`src/scripts/main.js` (`initHeroDecorAsset`) tenta carregar **`assets/hero/moeda.png`**.
 Se o arquivo existir, ele substitui o SVG inline automaticamente; se não existir, o SVG permanece
 e nenhum erro é exibido. Ou seja: basta o usuário colocar o arquivo nesse caminho, sem tocar no código.
 
