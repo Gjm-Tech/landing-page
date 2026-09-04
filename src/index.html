@@ -147,9 +147,9 @@
               <span class="hero-card__title">Controle de caixa</span>
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color:var(--text-muted-dark)"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>
             </div>
-            <p class="hero-card__value">R$ 8.450,00</p>
+            <p class="hero-card__value" data-previa="caixa-valor">R$ 8.450,00</p>
             <p class="hero-card__meta">Entradas do dia</p>
-            <div class="hero-card__chart" aria-hidden="true">
+            <div class="hero-card__chart" data-previa="caixa-grafico" aria-hidden="true">
               <i style="height:38%"></i>
               <i style="height:56%"></i>
               <i style="height:44%"></i>
@@ -171,21 +171,21 @@
               <span class="hero-card__title">Controle de estoque</span>
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color:var(--text-muted)"><path d="m21 8-9-5-9 5v8l9 5 9-5Z"/><path d="M3 8l9 5 9-5M12 13v8"/></svg>
             </div>
-            <p class="hero-card__value">312 itens</p>
+            <p class="hero-card__value" data-previa="estoque-total">312 itens</p>
             <p class="hero-card__meta">Cadastrados no catálogo</p>
 
             <div class="hero-card__rows">
               <div class="hero-card__row">
                 <span class="hero-card__dot" style="background:var(--accent-green)"></span>
                 <span>Em estoque</span>
-                <span>268</span>
+                <span data-previa="estoque-ok">268</span>
               </div>
               <div class="hero-card__row">
                 <span class="hero-card__dot" style="background:var(--accent-coral)"></span>
                 <span>Estoque baixo</span>
-                <span>44</span>
+                <span data-previa="estoque-baixo">44</span>
               </div>
-              <div class="hero-card__bar" aria-hidden="true"><i style="width:86%"></i></div>
+              <div class="hero-card__bar" aria-hidden="true"><i data-previa="estoque-barra" style="width:86%"></i></div>
             </div>
           </article>
 

@@ -270,7 +270,69 @@ function initHeroDecorAsset() {
 }
 
 /* --------------------------------------------------------------------------
-   6. Reveal das seções ao entrar na viewport
+   6. Valores da prévia dos cards do hero
+
+   Os dois cards do hero são uma ILUSTRAÇÃO da interface, não dados reais da
+   GJM Tech (a legenda abaixo deles diz isso na tela). A cada carregamento da
+   página um dos 10 conjuntos abaixo é sorteado, para a prévia não parecer uma
+   captura de tela congelada.
+
+   Cada conjunto é internamente coerente: "em estoque" é sempre
+   `itens - baixo`, e a barra de progresso reflete essa proporção — nada é
+   sorteado de forma independente, senão a prévia mostraria contas erradas.
+   -------------------------------------------------------------------------- */
+
+const PREVIAS = [
+  { caixa:  8450.00, barras: [38, 56, 44, 72, 60, 92, 66], itens: 312, baixo: 44 },
+  { caixa:  5280.50, barras: [52, 34, 68, 41, 77, 59, 88], itens: 198, baixo: 61 },
+  { caixa: 12730.00, barras: [44, 71, 39, 86, 55, 94, 62], itens: 486, baixo: 33 },
+  { caixa:  3940.80, barras: [61, 47, 83, 36, 70, 52, 91], itens: 154, baixo: 40 },
+  { caixa:  9615.20, barras: [35, 64, 49, 90, 58, 76, 43], itens: 367, baixo: 22 },
+  { caixa:  6870.00, barras: [73, 42, 57, 33, 89, 66, 50], itens: 241, baixo: 57 },
+  { caixa: 15320.40, barras: [46, 80, 37, 63, 95, 54, 69], itens: 529, baixo: 95 },
+  { caixa:  4560.90, barras: [58, 39, 74, 48, 62, 87, 41], itens: 176, baixo: 13 },
+  { caixa: 11080.00, barras: [40, 67, 93, 51, 45, 78, 60], itens: 403, baixo: 110 },
+  { caixa:  7290.60, barras: [69, 45, 55, 82, 38, 71, 96], itens: 268, baixo: 48 },
+];
+
+const emReais = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' });
+const emNumero = new Intl.NumberFormat('pt-BR');
+
+function initPreviaCards() {
+  const campo = (nome) => document.querySelector(`[data-previa="${nome}"]`);
+
+  const valor = campo('caixa-valor');
+  const grafico = campo('caixa-grafico');
+  const total = campo('estoque-total');
+  const ok = campo('estoque-ok');
+  const baixo = campo('estoque-baixo');
+  const barra = campo('estoque-barra');
+
+  // Fora da Home não existe prévia; e se faltar qualquer campo, é melhor
+  // deixar os valores do HTML do que montar um card pela metade.
+  if (!valor || !grafico || !total || !ok || !baixo || !barra) return;
+
+  const previa = PREVIAS[Math.floor(Math.random() * PREVIAS.length)];
+  const emEstoque = previa.itens - previa.baixo;
+
+  valor.textContent = emReais.format(previa.caixa);
+  total.textContent = `${emNumero.format(previa.itens)} itens`;
+  ok.textContent = emNumero.format(emEstoque);
+  baixo.textContent = emNumero.format(previa.baixo);
+  barra.style.width = `${Math.round((emEstoque / previa.itens) * 100)}%`;
+
+  // A barra mais alta do gráfico é a destacada. Usa o índice, não o valor,
+  // para não destacar duas barras em caso de empate.
+  const indiceMaior = previa.barras.indexOf(Math.max(...previa.barras));
+  Array.from(grafico.children).forEach((coluna, i) => {
+    if (previa.barras[i] === undefined) return;
+    coluna.style.height = `${previa.barras[i]}%`;
+    coluna.classList.toggle('is-active', i === indiceMaior);
+  });
+}
+
+/* --------------------------------------------------------------------------
+   7. Reveal das seções ao entrar na viewport
    -------------------------------------------------------------------------- */
 
 function initReveal() {
@@ -297,7 +359,7 @@ function initReveal() {
 }
 
 /* --------------------------------------------------------------------------
-   7. Formulário de contato
+   8. Formulário de contato
 
    ATENÇÃO: o projeto não tem backend (ver CLAUDE.md). O formulário valida os
    campos no navegador, mas NÃO envia nada — e diz isso ao usuário em vez de
@@ -338,7 +400,7 @@ function initContactForm() {
 }
 
 /* --------------------------------------------------------------------------
-   8. Ano do rodapé
+   9. Ano do rodapé
    -------------------------------------------------------------------------- */
 
 function initYear() {
@@ -353,6 +415,7 @@ initDropdowns();
 initDrawer();
 initHeroParallax();
 initHeroDecorAsset();
+initPreviaCards();
 initReveal();
 initContactForm();
 initYear();

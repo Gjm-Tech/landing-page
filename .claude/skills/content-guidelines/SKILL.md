@@ -42,6 +42,22 @@ Enquanto não houver dados reais, usar **sempre**:
 
 **Nunca** substituir por um e-mail/telefone real inventado, nem por um "exemplo verossímil" (ex: não trocar por `contato@gjmtech.com.br` a menos que o usuário confirme esse domínio explicitamente). Se o dado real não foi informado, o placeholder permanece — mesmo que pareça "feio" no design, isso é intencional até a informação real chegar.
 
+## Números na tela: prévia ilustrativa, nunca métrica
+
+Os cards do hero e os mocks de tela da página do produto mostram números
+(R$ do caixa, itens em estoque, nº de clientes). **Nada disso é dado real da GJM Tech** —
+são ilustrações de interface, e cada bloco carrega essa ressalva visível na tela
+("Prévia ilustrativa da interface — valores meramente demonstrativos").
+
+Os dois cards do hero **sorteiam um entre 10 conjuntos a cada carregamento da página**
+(`PREVIAS` em `src/scripts/main.js`), para não parecerem uma captura congelada. Regra ao
+mexer nesses dados: cada conjunto é internamente coerente — "em estoque" é sempre
+`itens - baixo`, e a barra de progresso reflete essa proporção. Nunca sortear os campos de
+forma independente, senão a prévia passa a mostrar conta errada.
+
+Isso é diferente de **prova social inventada**, que continua proibida: nada de "12K+
+empresas", "98% de satisfação" ou depoimento fabricado.
+
 ## Tom de voz
 
 - Profissional, direto, sem jargão técnico excessivo — o público não é técnico (são donos de loja/gráfica, não desenvolvedores)
