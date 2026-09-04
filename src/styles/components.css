@@ -1,0 +1,484 @@
+/* ==========================================================================
+   Componentes: header, nav, botões, eyebrow, footer
+   ========================================================================== */
+
+/* --------------------------------------------------------- Botões */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 20px;
+  border-radius: var(--radius-sm);
+  font-size: var(--fs-small);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  transition: background-color var(--dur) var(--ease),
+              color var(--dur) var(--ease),
+              transform var(--dur) var(--ease),
+              box-shadow var(--dur) var(--ease);
+}
+
+.btn:hover { transform: translateY(-1px); }
+.btn:active { transform: translateY(0); }
+
+.btn__arrow {
+  transition: transform var(--dur) var(--ease);
+}
+
+.btn:hover .btn__arrow {
+  transform: translateX(3px);
+}
+
+.btn--primary {
+  background: var(--brand-primary);
+  color: var(--text-white);
+  box-shadow: var(--shadow-brand);
+}
+
+.btn--primary:hover {
+  background: var(--brand-primary-hover);
+}
+
+.btn--ghost-light {
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text-white);
+  border: 1px solid var(--border-dark);
+}
+
+.btn--ghost-light:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.btn--ghost-dark {
+  background: transparent;
+  color: var(--text-dark);
+  border: 1px solid var(--border-light);
+}
+
+.btn--ghost-dark:hover {
+  background: var(--bg-card-light);
+}
+
+.btn--lg {
+  padding: 15px 26px;
+  font-size: 1rem;
+}
+
+/* --------------------------------------------------------- Eyebrow / label */
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 18px;
+  font-size: var(--fs-label);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--brand-primary);
+}
+
+.section--dark .eyebrow {
+  color: var(--brand-bright);
+}
+
+.eyebrow::before {
+  content: '';
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: currentColor;
+  box-shadow: 0 0 0 4px color-mix(in srgb, currentColor 18%, transparent);
+}
+
+/* --------------------------------------------------------- Cabeçalho de seção */
+
+.section-head {
+  max-width: 640px;
+}
+
+.section-head--center {
+  margin-inline: auto;
+  text-align: center;
+}
+
+.section-head p {
+  margin-top: 18px;
+  color: var(--text-muted);
+}
+
+.section--dark .section-head p {
+  color: var(--text-muted-dark);
+}
+
+/* --------------------------------------------------------- Header / navegação */
+
+.site-header {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 100;
+  height: var(--header-h);
+  display: flex;
+  align-items: center;
+  background: transparent;
+  border-bottom: 1px solid transparent;
+  transition: background-color var(--dur) var(--ease),
+              border-color var(--dur) var(--ease),
+              backdrop-filter var(--dur) var(--ease);
+}
+
+.site-header.is-scrolled {
+  background: rgba(10, 10, 10, 0.72);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom-color: var(--border-dark);
+}
+
+.site-header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+/* Logo — o arquivo tem fundo escuro embutido E uma moldura vazia larga
+   (o logotipo ocupa só ~70% x 39% do JPG). Por isso a imagem é ampliada
+   dentro de um container que recorta a moldura, senão o logotipo renderiza
+   ilegível. Ver skill design-system > Logos. */
+.brand {
+  --brand-w: 92px;
+
+  position: relative;
+  display: block;
+  flex-shrink: 0;
+  width: var(--brand-w);
+  /* proporção real do logotipo dentro do arquivo: 448 x 247 = 1.81 */
+  aspect-ratio: 1.81;
+  overflow: hidden;
+  border-radius: var(--radius-sm);
+  background: var(--bg-dark);
+}
+
+.brand img {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 143%;          /* 100 / 0.70 — desfaz a moldura horizontal */
+  height: auto;
+  max-width: none;
+  /* centro real do logotipo dentro do arquivo: 49.7% / 48.2% */
+  transform: translate(-49.7%, -48.2%);
+}
+
+.brand--sm { --brand-w: 78px; }
+.brand--lg { --brand-w: 112px; }
+
+/* --- Nav desktop --- */
+
+.nav {
+  display: none;
+}
+
+.nav__list {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.nav__item {
+  position: relative;
+}
+
+.nav__link,
+.nav__trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 14px;
+  border-radius: var(--radius-sm);
+  font-size: var(--fs-small);
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.78);
+  transition: color var(--dur) var(--ease), background-color var(--dur) var(--ease);
+}
+
+.nav__link:hover,
+.nav__trigger:hover,
+.nav__item:focus-within > .nav__trigger,
+.nav__link[aria-current='page'] {
+  color: var(--text-white);
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.nav__chevron {
+  transition: transform var(--dur) var(--ease);
+}
+
+.nav__item:hover .nav__chevron,
+.nav__item:focus-within .nav__chevron {
+  transform: rotate(180deg);
+}
+
+/* --- Dropdown --- */
+
+.nav__dropdown {
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 0;
+  min-width: 244px;
+  padding: 8px;
+  border-radius: var(--radius);
+  background: #17171A;
+  border: 1px solid var(--border-dark);
+  box-shadow: var(--shadow-float);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-6px);
+  transition: opacity var(--dur) var(--ease),
+              transform var(--dur) var(--ease),
+              visibility var(--dur) var(--ease);
+}
+
+.nav__item:hover .nav__dropdown,
+.nav__item:focus-within .nav__dropdown {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.nav__dropdown a {
+  display: block;
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  font-size: var(--fs-small);
+  color: rgba(255, 255, 255, 0.82);
+  transition: background-color var(--dur) var(--ease), color var(--dur) var(--ease);
+}
+
+.nav__dropdown a:hover {
+  background: rgba(255, 255, 255, 0.07);
+  color: var(--text-white);
+}
+
+.nav__dropdown span {
+  display: block;
+  margin-top: 2px;
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  color: var(--text-muted-dark);
+}
+
+/* --- Ações do header --- */
+
+.site-header__actions {
+  display: none;
+}
+
+/* --- Botão hambúrguer --- */
+
+.nav-toggle {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 44px;
+  height: 44px;
+  padding: 0 10px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-dark);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.nav-toggle span {
+  display: block;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--text-white);
+  transition: transform var(--dur) var(--ease), opacity var(--dur) var(--ease);
+}
+
+.nav-toggle[aria-expanded='true'] span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.nav-toggle[aria-expanded='true'] span:nth-child(2) {
+  opacity: 0;
+}
+
+.nav-toggle[aria-expanded='true'] span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* --------------------------------------------------------- Drawer mobile */
+
+.drawer-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 110;
+  background: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--dur) var(--ease), visibility var(--dur) var(--ease);
+}
+
+.drawer-overlay.is-open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 120;
+  width: min(340px, 86vw);
+  height: 100dvh;
+  padding: 20px;
+  overflow-y: auto;
+  background: var(--bg-dark);
+  border-left: 1px solid var(--border-dark);
+  color: var(--text-white);
+  transform: translateX(100%);
+  visibility: hidden;
+  transition: transform 300ms var(--ease), visibility 300ms var(--ease);
+}
+
+.drawer.is-open {
+  transform: translateX(0);
+  visibility: visible;
+}
+
+.drawer__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.drawer__close {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-dark);
+  color: var(--text-white);
+}
+
+.drawer__close:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.drawer__group + .drawer__group {
+  margin-top: 6px;
+  padding-top: 6px;
+  border-top: 1px solid var(--border-dark);
+}
+
+.drawer__label {
+  display: block;
+  padding: 14px 4px 6px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted-dark);
+}
+
+.drawer a.drawer__link {
+  display: block;
+  padding: 12px 4px;
+  font-size: 1.0625rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.drawer a.drawer__link:hover {
+  color: var(--brand-bright);
+}
+
+.drawer .btn {
+  width: 100%;
+  justify-content: center;
+  margin-top: 24px;
+}
+
+/* --------------------------------------------------------- Footer */
+
+.site-footer {
+  background: var(--bg-dark);
+  color: var(--text-white);
+  padding-block: 72px 32px;
+}
+
+.site-footer__top {
+  display: grid;
+  gap: 44px;
+  padding-bottom: 44px;
+  border-bottom: 1px solid var(--border-dark);
+}
+
+.site-footer__about p {
+  margin-top: 20px;
+  max-width: 34ch;
+  font-size: var(--fs-small);
+  color: var(--text-muted-dark);
+}
+
+.site-footer__cols {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 32px;
+}
+
+.site-footer h4 {
+  margin-bottom: 16px;
+  font-size: var(--fs-label);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted-dark);
+}
+
+.site-footer li + li {
+  margin-top: 11px;
+}
+
+.site-footer li a {
+  font-size: var(--fs-small);
+  color: rgba(255, 255, 255, 0.8);
+  transition: color var(--dur) var(--ease);
+}
+
+.site-footer li a:hover {
+  color: var(--brand-bright);
+}
+
+.site-footer__bottom {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding-top: 28px;
+  font-size: 0.875rem;
+  color: var(--text-muted-dark);
+}
+
+.site-footer__bottom p { margin: 0; }
+
+/* --------------------------------------------------------- Breakpoints */
+
+@media (min-width: 992px) {
+  .nav { display: block; }
+  .site-header__actions { display: flex; align-items: center; gap: 12px; }
+  .nav-toggle { display: none; }
+  .drawer, .drawer-overlay { display: none; }
+
+  .site-footer__top {
+    grid-template-columns: 1.1fr 1.6fr;
+    gap: 64px;
+  }
+}

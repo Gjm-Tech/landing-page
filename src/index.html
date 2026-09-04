@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GJM Tech — Software house para a gestão do seu negócio</title>
+  <meta name="description" content="A GJM Tech desenvolve o GJM Gestão: caixa, estoque, nota fiscal e clientes num sistema só, pensado para lojas, gráficas e pequenos comércios.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles/tokens.css">
+  <link rel="stylesheet" href="styles/base.css">
+  <link rel="stylesheet" href="styles/components.css">
+  <link rel="stylesheet" href="styles/home.css">
+</head>
+<body>
+
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+
+  <!-- ==================================================== HEADER -->
+  <header class="site-header" id="site-header">
+    <div class="container site-header__inner">
+
+      <a class="brand" href="index.html" aria-label="GJM Tech — página inicial">
+        <img src="../assets/images/logo.jpg" alt="GJM Tech">
+      </a>
+
+      <nav class="nav" aria-label="Navegação principal">
+        <ul class="nav__list">
+          <li class="nav__item">
+            <a class="nav__link" href="index.html" aria-current="page">Home</a>
+          </li>
+
+          <li class="nav__item">
+            <button class="nav__trigger" type="button" aria-expanded="false" aria-controls="dd-produtos">
+              Produtos
+              <svg class="nav__chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+            </button>
+            <div class="nav__dropdown" id="dd-produtos">
+              <a href="produtos/gjm-gestao.html">
+                GJM Gestão
+                <span>Caixa, estoque, nota fiscal e clientes</span>
+              </a>
+            </div>
+          </li>
+
+          <li class="nav__item">
+            <button class="nav__trigger" type="button" aria-expanded="false" aria-controls="dd-institucional">
+              Institucional
+              <svg class="nav__chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+            </button>
+            <div class="nav__dropdown" id="dd-institucional">
+              <a href="institucional/quem-somos.html">
+                Quem Somos
+                <span>A história e o propósito da GJM Tech</span>
+              </a>
+            </div>
+          </li>
+
+          <li class="nav__item">
+            <button class="nav__trigger" type="button" aria-expanded="false" aria-controls="dd-duvidas">
+              Dúvidas
+              <svg class="nav__chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+            </button>
+            <div class="nav__dropdown" id="dd-duvidas">
+              <a href="duvidas/contato.html">
+                Contato
+                <span>Fale com quem desenvolve o produto</span>
+              </a>
+            </div>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="site-header__actions">
+        <a class="btn btn--primary" href="duvidas/contato.html">
+          Fale com o nosso time
+          <svg class="btn__arrow" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
+
+      <button class="nav-toggle" type="button" id="nav-toggle" aria-expanded="false" aria-controls="drawer">
+        <span></span><span></span><span></span>
+        <span class="sr-only">Abrir menu</span>
+      </button>
+
+    </div>
+  </header>
+
+  <!-- ==================================================== DRAWER MOBILE -->
+  <div class="drawer-overlay" id="drawer-overlay" hidden></div>
+
+  <aside class="drawer" id="drawer" aria-label="Menu" aria-hidden="true">
+    <div class="drawer__head">
+      <span class="brand brand--sm">
+        <img src="../assets/images/logo.jpg" alt="GJM Tech">
+      </span>
+      <button class="drawer__close" type="button" id="drawer-close">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
+        <span class="sr-only">Fechar menu</span>
+      </button>
+    </div>
+
+    <div class="drawer__group">
+      <a class="drawer__link" href="index.html">Home</a>
+    </div>
+
+    <div class="drawer__group">
+      <span class="drawer__label">Produtos</span>
+      <a class="drawer__link" href="produtos/gjm-gestao.html">GJM Gestão</a>
+    </div>
+
+    <div class="drawer__group">
+      <span class="drawer__label">Institucional</span>
+      <a class="drawer__link" href="institucional/quem-somos.html">Quem Somos</a>
+    </div>
+
+    <div class="drawer__group">
+      <span class="drawer__label">Dúvidas</span>
+      <a class="drawer__link" href="duvidas/contato.html">Contato</a>
+    </div>
+
+    <a class="btn btn--primary btn--lg" href="duvidas/contato.html">
+      Fale com o nosso time
+      <svg class="btn__arrow" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a>
+  </aside>
+
+  <main id="conteudo">
+
+    <!-- ==================================================== HERO -->
+    <section class="hero">
+      <div class="container">
+
+        <div class="hero__intro">
+          <span class="eyebrow">GJM Tech · Software house</span>
+          <h1>A gestão do seu negócio <em>organizada num lugar só</em></h1>
+          <p class="hero__lede">
+            Desenvolvemos o GJM Gestão: caixa, estoque, nota fiscal e clientes reunidos
+            num sistema simples, feito para quem toca uma loja, uma gráfica ou um
+            comércio de bairro no dia a dia.
+          </p>
+
+          <div class="hero__actions">
+            <a class="btn btn--primary btn--lg" href="duvidas/contato.html">
+              Fale com o nosso time
+              <svg class="btn__arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </a>
+            <a class="btn btn--ghost-light btn--lg" href="produtos/gjm-gestao.html">
+              Conhecer o GJM Gestão
+            </a>
+          </div>
+
+          <p class="hero__note">Produto em desenvolvimento — fale com a gente para acompanhar de perto.</p>
+        </div>
+
+        <div class="hero__stage">
+
+          <!-- Card escuro — Controle de Caixa -->
+          <article class="hero-card hero-card--dark">
+            <div class="hero-card__head">
+              <span class="hero-card__title">Controle de caixa</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color:var(--text-muted-dark)"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>
+            </div>
+            <p class="hero-card__value">R$ 8.450,00</p>
+            <p class="hero-card__meta">Entradas do dia</p>
+            <div class="hero-card__chart" aria-hidden="true">
+              <i style="height:38%"></i>
+              <i style="height:56%"></i>
+              <i style="height:44%"></i>
+              <i style="height:72%"></i>
+              <i style="height:60%"></i>
+              <i class="is-active" style="height:92%"></i>
+              <i style="height:66%"></i>
+            </div>
+          </article>
+
+          <!-- Card claro — Controle de Estoque -->
+          <article class="hero-card hero-card--light">
+            <div class="hero-card__head">
+              <span class="hero-card__title">Controle de estoque</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color:var(--text-muted)"><path d="m21 8-9-5-9 5v8l9 5 9-5Z"/><path d="M3 8l9 5 9-5M12 13v8"/></svg>
+            </div>
+            <p class="hero-card__value">312 itens</p>
+            <p class="hero-card__meta">Cadastrados no catálogo</p>
+
+            <div class="hero-card__rows">
+              <div class="hero-card__row">
+                <span class="hero-card__dot" style="background:var(--accent-green)"></span>
+                <span>Em estoque</span>
+                <span>268</span>
+              </div>
+              <div class="hero-card__row">
+                <span class="hero-card__dot" style="background:var(--accent-coral)"></span>
+                <span>Estoque baixo</span>
+                <span>44</span>
+              </div>
+              <div class="hero-card__bar" aria-hidden="true"><i style="width:86%"></i></div>
+            </div>
+          </article>
+
+          <!--
+            Elemento decorativo com paralaxe — lâmpada. Só desktop.
+            Ver .claude/skills/parallax-hero-effect/SKILL.md
+
+            Desenhado em SVG inline (nenhum arquivo de imagem é gerado ou baixado).
+            aguardando asset: se `assets/hero/lampada.png` existir, o main.js
+            troca este SVG pela imagem automaticamente.
+          -->
+          <div class="hero-decor" id="hero-decor" aria-hidden="true">
+            <svg class="hero-decor__svg" viewBox="0 0 120 170" fill="none" role="presentation">
+              <defs>
+                <radialGradient id="bulbGlow" cx="50%" cy="42%" r="52%">
+                  <stop offset="0%"   stop-color="#BFE9FF" stop-opacity=".95"/>
+                  <stop offset="55%"  stop-color="#3B8BFF" stop-opacity=".55"/>
+                  <stop offset="100%" stop-color="#0A63E0" stop-opacity=".18"/>
+                </radialGradient>
+                <linearGradient id="bulbGlass" x1="24%" y1="8%" x2="82%" y2="92%">
+                  <stop offset="0%"   stop-color="#EAF6FF" stop-opacity=".92"/>
+                  <stop offset="42%"  stop-color="#9FD8D6" stop-opacity=".70"/>
+                  <stop offset="100%" stop-color="#0A63E0" stop-opacity=".62"/>
+                </linearGradient>
+                <linearGradient id="bulbBase" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%"   stop-color="#E4E7EC"/>
+                  <stop offset="48%"  stop-color="#9AA1AC"/>
+                  <stop offset="100%" stop-color="#5C636E"/>
+                </linearGradient>
+              </defs>
+
+              <!-- halo -->
+              <circle cx="60" cy="56" r="54" fill="url(#bulbGlow)" opacity=".38"/>
+
+              <!-- vidro -->
+              <path d="M60 8a44 44 0 0 1 27 78.5c-4.4 3.4-6.5 7.6-6.5 12.6v3.4h-41v-3.4c0-5-2.1-9.2-6.5-12.6A44 44 0 0 1 60 8Z"
+                    fill="url(#bulbGlass)" stroke="#BFE0FF" stroke-opacity=".55" stroke-width="1.6"/>
+
+              <!-- brilho especular -->
+              <path d="M40 34a26 26 0 0 1 15-14" stroke="#FFFFFF" stroke-opacity=".72"
+                    stroke-width="5" stroke-linecap="round"/>
+
+              <!-- filamento -->
+              <path d="M49 88V73l5.5-7 5.5 7 5.5-7 5.5 7v15"
+                    stroke="#F4948F" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>
+
+              <!-- rosca -->
+              <rect x="38.5" y="104" width="43" height="11" rx="4.5" fill="url(#bulbBase)"/>
+              <rect x="41"   y="118" width="38" height="10" rx="4.5" fill="url(#bulbBase)"/>
+              <path d="M44.5 131h31v6a15.5 15.5 0 0 1-31 0v-6Z" fill="url(#bulbBase)"/>
+              <path d="M52 149.5h16" stroke="#3A4049" stroke-width="6" stroke-linecap="round"/>
+            </svg>
+          </div>
+
+        </div>
+
+        <p class="hero__disclaimer">Prévia ilustrativa da interface — valores meramente demonstrativos.</p>
+
+      </div>
+    </section>
+
+    <!-- ==================================================== FUNCIONALIDADES -->
+    <section class="section section--light" id="funcionalidades">
+      <div class="container">
+
+        <div class="section-head section-head--center features__head reveal">
+          <span class="eyebrow">O que o GJM Gestão faz</span>
+          <h2>Quatro controles que resolvem o dia a dia</h2>
+          <p>
+            Nada de menu cheio de função que ninguém usa. O GJM Gestão começa pelo
+            que realmente trava a rotina de um pequeno comércio.
+          </p>
+        </div>
+
+        <div class="features__grid">
+
+          <article class="feature-card reveal">
+            <div class="feature-card__icon" style="background:var(--accent-mint)">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2.5"/><path d="M6 12h.01M18 12h.01"/></svg>
+            </div>
+            <h3>Controle de caixa</h3>
+            <p>
+              Entradas e saídas registradas na hora. No fim do dia, o caixa fecha sozinho.
+            </p>
+          </article>
+
+          <article class="feature-card reveal">
+            <div class="feature-card__icon" style="background:var(--accent-lavender)">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m21 8-9-5-9 5v8l9 5 9-5Z"/><path d="m3 8 9 5 9-5M12 13v8"/></svg>
+            </div>
+            <h3>Controle de estoque</h3>
+            <p>
+              Cada venda baixa o item. O que está acabando aparece antes de faltar.
+            </p>
+          </article>
+
+          <article class="feature-card reveal">
+            <div class="feature-card__icon" style="background:var(--accent-pink)">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H7a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7Z"/><path d="M14 2v5h5M9 13h6M9 17h4"/></svg>
+            </div>
+            <h3>Emissão de nota fiscal</h3>
+            <p>
+              Emitida direto da venda, sem redigitar dados em outro programa.
+            </p>
+          </article>
+
+          <article class="feature-card reveal">
+            <div class="feature-card__icon" style="background:var(--accent-green)">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/></svg>
+            </div>
+            <h3>Controle de clientes</h3>
+            <p>
+              Histórico, contato e o que cada cliente costuma levar, num lugar só.
+            </p>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================================================== CONTROLE TOTAL -->
+    <section class="section section--dark control">
+      <div class="container control__inner">
+
+        <div class="reveal">
+          <span class="eyebrow">Um sistema, não quatro planilhas</span>
+          <h2>Controle total do seu negócio, sem depender de improviso</h2>
+          <p style="margin-top:18px;color:var(--text-muted-dark)">
+            Caderno para o caixa, planilha para o estoque, um programa à parte para a
+            nota e a memória para lembrar do cliente. O GJM Gestão nasce para juntar
+            essas quatro pontas num fluxo só.
+          </p>
+
+          <ul class="control__list">
+            <li>
+              <span class="control__check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></span>
+              A venda que sai do caixa já baixa do estoque — sem lançar duas vezes.
+            </li>
+            <li>
+              <span class="control__check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></span>
+              A nota fiscal usa os dados do cliente e do produto que já estão no sistema.
+            </li>
+            <li>
+              <span class="control__check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></span>
+              Linguagem de quem trabalha no balcão, não de quem trabalha com TI.
+            </li>
+            <li>
+              <span class="control__check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></span>
+              Construído junto com pequenos comerciantes, resolvendo problema real.
+            </li>
+          </ul>
+
+          <div class="control__cta">
+            <a class="btn btn--primary btn--lg" href="produtos/gjm-gestao.html">
+              Ver o GJM Gestão em detalhe
+              <svg class="btn__arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="product-showcase reveal">
+          <div class="product-showcase__logo">
+            <img src="../assets/images/logo_produto.png" alt="GJM Gestão — controle, organização e resultados">
+          </div>
+          <span class="product-showcase__tag">Em desenvolvimento</span>
+          <p>
+            O GJM Gestão ainda está sendo construído. Quem entra em contato agora
+            acompanha a evolução do produto desde o começo.
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==================================================== SOBRE A GJM TECH -->
+    <section class="section section--light about">
+      <div class="container about__inner">
+
+        <div class="about__text reveal">
+          <span class="eyebrow">Quem constrói</span>
+          <h2 style="margin-bottom:20px">Uma software house focada em quem toca o negócio</h2>
+          <p>
+            A GJM Tech é uma software house dedicada a criar software de gestão para
+            pequenos e médios negócios — lojas de roupas, gráficas de bairro e o
+            comércio que sustenta a rua.
+          </p>
+          <p>
+            Nosso ponto de partida é simples: entender a rotina antes de escrever a
+            primeira linha de código. É desse contato direto que sai o GJM Gestão.
+          </p>
+
+          <div class="about__cta">
+            <a class="btn btn--ghost-dark btn--lg" href="institucional/quem-somos.html">
+              Conhecer a GJM Tech
+              <svg class="btn__arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="about__points reveal">
+          <article class="about-point">
+            <h3>Perto do cliente</h3>
+            <p>Conversa direta com quem vai usar, sem intermediário e sem manual de 80 páginas.</p>
+          </article>
+          <article class="about-point">
+            <h3>Simples de usar</h3>
+            <p>Interface pensada para o balcão: pouca tela, pouco clique, nada de treinamento longo.</p>
+          </article>
+          <article class="about-point">
+            <h3>Feito para crescer</h3>
+            <p>Começa pelo essencial e evolui junto com o negócio, no ritmo de quem usa.</p>
+          </article>
+          <article class="about-point">
+            <h3>Sem promessa vazia</h3>
+            <p>Comunicamos o que já existe e o que ainda está em construção — sem inventar entrega.</p>
+          </article>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==================================================== CTA FINAL -->
+    <section class="final-cta">
+      <div class="container">
+        <div class="final-cta__box reveal">
+          <h2>Quer acompanhar o GJM Gestão de perto?</h2>
+          <p>
+            Conte pra gente como funciona a rotina do seu negócio hoje. Isso ajuda a
+            construir o produto — e garante que você seja avisado assim que ele estiver pronto.
+          </p>
+
+          <div class="final-cta__actions">
+            <a class="btn btn--primary btn--lg" href="duvidas/contato.html">
+              Fale com o nosso time
+              <svg class="btn__arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </a>
+          </div>
+
+          <!-- Placeholders obrigatórios até o usuário informar os dados reais
+               (ver skill content-guidelines) -->
+          <p class="final-cta__contact">
+            Ou fale direto: <strong>XXXXX@email.com</strong> · <strong>+55 XXXX-XXXX</strong>
+          </p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==================================================== FOOTER -->
+  <footer class="site-footer">
+    <div class="container">
+
+      <div class="site-footer__top">
+        <div class="site-footer__about">
+          <span class="brand brand--lg">
+            <img src="../assets/images/logo.jpg" alt="GJM Tech">
+          </span>
+          <p>
+            Software house de soluções de gestão para pequenos e médios negócios.
+            Criadora do GJM Gestão.
+          </p>
+        </div>
+
+        <div class="site-footer__cols">
+          <div>
+            <h4>Produtos</h4>
+            <ul>
+              <li><a href="produtos/gjm-gestao.html">GJM Gestão</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Institucional</h4>
+            <ul>
+              <li><a href="institucional/quem-somos.html">Quem Somos</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Dúvidas</h4>
+            <ul>
+              <li><a href="duvidas/contato.html">Contato</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Contato</h4>
+            <ul>
+              <li><a href="mailto:XXXXX@email.com">XXXXX@email.com</a></li>
+              <li><a href="tel:+55XXXXXXXX">+55 XXXX-XXXX</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="site-footer__bottom">
+        <p>© <span id="ano">2026</span> GJM Tech. Todos os direitos reservados.</p>
+        <p>Feito no Brasil 🇧🇷</p>
+      </div>
+
+    </div>
+  </footer>
+
+  <script type="module" src="scripts/main.js"></script>
+</body>
+</html>

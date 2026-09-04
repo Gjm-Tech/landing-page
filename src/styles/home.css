@@ -1,0 +1,581 @@
+/* ==========================================================================
+   Home — seções
+   ========================================================================== */
+
+/* --------------------------------------------------------- Hero */
+
+.hero {
+  position: relative;
+  /* Sem `overflow: hidden` de propósito: a lâmpada do paralaxe precisa
+     "atravessar" para fora do hero e sobrepor a seção clara seguinte.
+     O brilho do ::before já se dissolve antes da borda, então não vaza. */
+  background: var(--bg-dark);
+  color: var(--text-white);
+  padding-top: calc(var(--header-h) + clamp(48px, 8vh, 96px));
+  padding-bottom: clamp(56px, 9vh, 110px);
+}
+
+/* Brilho azul da marca ao fundo */
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -22%;
+  left: 50%;
+  translate: -50% 0;
+  width: min(1100px, 130vw);
+  aspect-ratio: 1;
+  background: radial-gradient(
+    circle,
+    rgba(10, 99, 224, 0.30) 0%,
+    rgba(13, 67, 163, 0.12) 42%,
+    transparent 68%
+  );
+  pointer-events: none;
+}
+
+.hero > .container {
+  position: relative;
+  z-index: 2;
+}
+
+.hero__intro {
+  max-width: 780px;
+  margin-inline: auto;
+  text-align: center;
+}
+
+.hero__intro h1 {
+  text-wrap: balance;
+}
+
+.hero__intro h1 em {
+  font-style: normal;
+  background: linear-gradient(100deg, var(--brand-bright), var(--brand-primary));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.hero__lede {
+  margin-top: 22px;
+  margin-inline: auto;
+  max-width: 60ch;
+  color: var(--text-muted-dark);
+  text-wrap: pretty;
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 34px;
+}
+
+.hero__note {
+  margin-top: 22px;
+  font-size: 0.875rem;
+  color: var(--text-muted-dark);
+}
+
+/* --- Palco dos cards flutuantes --- */
+
+.hero__stage {
+  position: relative;
+  margin-top: clamp(48px, 7vw, 84px);
+  display: grid;
+  gap: 20px;
+}
+
+.hero-card {
+  position: relative;
+  z-index: 3;
+  padding: 22px;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-float);
+}
+
+.hero-card__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.hero-card__title {
+  font-size: var(--fs-label);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.hero-card__value {
+  font-size: clamp(1.75rem, 1.4rem + 1.4vw, 2.25rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+}
+
+.hero-card__meta {
+  margin-top: 6px;
+  font-size: 0.875rem;
+}
+
+/* Card escuro — "Controle de Caixa" */
+.hero-card--dark {
+  background: linear-gradient(158deg, #1A1A1E 0%, #101013 100%);
+  border: 1px solid var(--border-dark);
+  color: var(--text-white);
+}
+
+.hero-card--dark .hero-card__title { color: var(--text-muted-dark); }
+.hero-card--dark .hero-card__meta { color: var(--accent-green); }
+
+/* Mini gráfico de barras (puro CSS, sem dados reais) */
+.hero-card__chart {
+  display: flex;
+  align-items: flex-end;
+  gap: 7px;
+  height: 74px;
+  margin-top: 22px;
+}
+
+.hero-card__chart i {
+  flex: 1;
+  border-radius: 3px 3px 2px 2px;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.hero-card__chart i.is-active {
+  background: linear-gradient(180deg, var(--brand-bright), var(--brand-primary));
+}
+
+/* Card claro — "Controle de Estoque" */
+.hero-card--light {
+  background: var(--bg-white);
+  color: var(--text-dark);
+}
+
+.hero-card--light .hero-card__title { color: var(--text-muted); }
+.hero-card--light .hero-card__meta { color: var(--text-muted); }
+
+.hero-card__rows {
+  display: grid;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.hero-card__row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: var(--fs-small);
+}
+
+.hero-card__dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.hero-card__row span:last-child {
+  margin-left: auto;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.hero-card__bar {
+  height: 6px;
+  border-radius: var(--radius-pill);
+  background: var(--bg-card-light);
+  overflow: hidden;
+}
+
+.hero-card__bar i {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--brand-primary);
+}
+
+/* Marca de "isto é uma ilustração, não um dado real" */
+.hero__disclaimer {
+  position: relative;
+  z-index: 3;
+  margin-top: clamp(24px, 5vw, 76px);
+  text-align: center;
+  font-size: 0.8125rem;
+  color: var(--text-muted-dark);
+}
+
+/* --- Elemento decorativo (lâmpada) com paralaxe --- */
+/*     ver .claude/skills/parallax-hero-effect/SKILL.md                     */
+
+.hero-decor {
+  position: absolute;
+  z-index: 5;
+  bottom: -40px;
+  left: 50%;
+  translate: -50% 0;
+  width: clamp(132px, 13vw, 186px);
+  pointer-events: none;
+  will-change: transform;
+  filter: drop-shadow(0 24px 36px rgba(0, 0, 0, 0.55))
+          drop-shadow(0 0 42px rgba(59, 139, 255, 0.42));
+}
+
+.hero-decor svg,
+.hero-decor img {
+  display: block;
+  width: 100%;
+  height: auto;
+  /* leve inclinação: o elemento é visto em ângulo, como na referência */
+  rotate: -8deg;
+}
+
+/* Respiro do brilho da lâmpada — sutil, não pisca */
+.hero-decor__svg {
+  animation: bulb-breathe 4.5s var(--ease) infinite;
+}
+
+@keyframes bulb-breathe {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.9; }
+}
+
+@media (max-width: 767px) {
+  /* Removido por completo no mobile, não apenas escondido. */
+  .hero-decor {
+    display: none !important;
+  }
+}
+
+@media (min-width: 768px) {
+  .hero__stage {
+    grid-template-columns: 1.05fr 1fr;
+    gap: 28px;
+    align-items: end;
+    max-width: 900px;
+    margin-inline: auto;
+  }
+
+  .hero-card { padding: 26px; }
+
+  .hero-card--dark  { transform: rotate(-1.2deg); }
+  .hero-card--light { transform: rotate(1.2deg) translateY(-18px); }
+
+  .hero-decor {
+    /* deslocada para a esquerda: sobrepõe o gráfico do card escuro,
+       não o texto do card claro */
+    left: 44%;
+    bottom: -74px;
+  }
+}
+
+/* --------------------------------------------------------- Funcionalidades */
+
+.features__head {
+  margin-bottom: clamp(40px, 5vw, 64px);
+}
+
+.features__grid {
+  display: grid;
+  gap: 24px;
+  grid-template-columns: 1fr;
+}
+
+.feature-card {
+  padding: 28px;
+  border-radius: var(--radius-lg);
+  background: var(--bg-card-light);
+  box-shadow: var(--shadow-card);
+  transition: transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+}
+
+.feature-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.10);
+}
+
+.feature-card__icon {
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  margin-bottom: 22px;
+  border-radius: var(--radius);
+  color: var(--text-dark);
+}
+
+.feature-card__icon svg {
+  width: 26px;
+  height: 26px;
+}
+
+.feature-card h3 {
+  margin-bottom: 10px;
+}
+
+.feature-card p {
+  font-size: var(--fs-small);
+  color: var(--text-muted);
+  text-wrap: pretty;
+}
+
+@media (min-width: 640px) {
+  .features__grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (min-width: 992px) {
+  .features__grid { grid-template-columns: repeat(4, 1fr); }
+}
+
+/* --------------------------------------------------------- Controle total */
+
+.control {
+  position: relative;
+  overflow: hidden;
+}
+
+.control::before {
+  content: '';
+  position: absolute;
+  right: -12%;
+  top: 10%;
+  width: min(620px, 80vw);
+  aspect-ratio: 1;
+  background: radial-gradient(circle, rgba(10, 99, 224, 0.22) 0%, transparent 66%);
+  pointer-events: none;
+}
+
+.control__inner {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  gap: clamp(40px, 6vw, 72px);
+  align-items: center;
+}
+
+.control__list {
+  display: grid;
+  gap: 8px;
+  margin-top: 32px;
+}
+
+.control__list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 14px 0;
+  border-top: 1px solid var(--border-dark);
+  font-size: var(--fs-small);
+  color: rgba(255, 255, 255, 0.86);
+}
+
+.control__list li:last-child {
+  border-bottom: 1px solid var(--border-dark);
+}
+
+.control__check {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  margin-top: 1px;
+  border-radius: 50%;
+  background: rgba(10, 99, 224, 0.18);
+  color: var(--brand-bright);
+}
+
+.control__check svg { width: 13px; height: 13px; }
+
+.control__cta { margin-top: 32px; }
+
+/* Vitrine do produto (logo GJM Gestão sobre superfície escura) */
+.product-showcase {
+  padding: clamp(28px, 4vw, 44px);
+  border-radius: var(--radius-lg);
+  background: linear-gradient(160deg, #16161A 0%, #0C0C0F 100%);
+  border: 1px solid var(--border-dark);
+  box-shadow: var(--shadow-float);
+  text-align: center;
+}
+
+/* Mesmo recorte da logo institucional: o logotipo do produto ocupa só
+   ~70% x 46% do PNG, o resto é moldura escura. */
+.product-showcase__logo {
+  position: relative;
+  width: min(320px, 100%);
+  aspect-ratio: 1.53;      /* 877 x 575 = proporção real do logotipo */
+  margin-inline: auto;
+  overflow: hidden;
+  border-radius: var(--radius);
+}
+
+.product-showcase__logo img {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 143%;             /* 100 / 0.699 */
+  height: auto;
+  max-width: none;
+  transform: translate(-50%, -52.4%);
+}
+
+.product-showcase__tag {
+  display: inline-block;
+  margin-top: 24px;
+  padding: 7px 16px;
+  border-radius: var(--radius-pill);
+  border: 1px solid rgba(10, 99, 224, 0.45);
+  background: rgba(10, 99, 224, 0.12);
+  font-size: var(--fs-label);
+  font-weight: 600;
+  color: var(--brand-bright);
+}
+
+.product-showcase p {
+  margin-top: 16px;
+  font-size: var(--fs-small);
+  color: var(--text-muted-dark);
+}
+
+@media (min-width: 992px) {
+  .control__inner { grid-template-columns: 1fr 0.85fr; }
+}
+
+/* --------------------------------------------------------- Sobre a GJM Tech */
+
+.about__inner {
+  display: grid;
+  gap: clamp(36px, 5vw, 64px);
+  align-items: center;
+}
+
+.about__text p + p { margin-top: 16px; }
+
+.about__text p {
+  color: var(--text-muted);
+  text-wrap: pretty;
+}
+
+.about__cta { margin-top: 30px; }
+
+.about__points {
+  display: grid;
+  gap: 16px;
+}
+
+.about-point {
+  padding: 24px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border-light);
+  background: var(--bg-white);
+}
+
+.about-point h3 {
+  font-size: 1rem;
+  margin-bottom: 8px;
+}
+
+.about-point p {
+  font-size: var(--fs-small);
+  color: var(--text-muted);
+}
+
+@media (min-width: 768px) {
+  .about__points { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (min-width: 992px) {
+  .about__inner { grid-template-columns: 1fr 1fr; }
+}
+
+/* --------------------------------------------------------- CTA final */
+
+.final-cta {
+  padding-block: clamp(56px, 6vw, 88px);
+  background: var(--bg-white);
+}
+
+.final-cta__box {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(40px, 6vw, 76px) clamp(24px, 5vw, 64px);
+  border-radius: clamp(var(--radius-lg), 2vw, 28px);
+  background: linear-gradient(140deg, var(--brand-primary) 0%, var(--brand-deep) 100%);
+  color: var(--text-white);
+  text-align: center;
+}
+
+.final-cta__box::after {
+  content: '';
+  position: absolute;
+  right: -8%;
+  bottom: -60%;
+  width: 460px;
+  aspect-ratio: 1;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.16) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+.final-cta__box > * { position: relative; z-index: 2; }
+
+.final-cta__box p {
+  margin-top: 18px;
+  margin-inline: auto;
+  max-width: 56ch;
+  color: rgba(255, 255, 255, 0.86);
+}
+
+.final-cta__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 34px;
+}
+
+.final-cta .btn--primary {
+  background: var(--bg-white);
+  color: var(--brand-primary);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+}
+
+.final-cta .btn--primary:hover {
+  background: #EFF4FF;
+}
+
+.final-cta__contact {
+  margin-top: 30px;
+  font-size: var(--fs-small);
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.final-cta__contact strong {
+  color: var(--text-white);
+  font-weight: 600;
+}
+
+/* --------------------------------------------------------- Reveal no scroll */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 600ms var(--ease), transform 600ms var(--ease);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
